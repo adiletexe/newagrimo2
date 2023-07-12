@@ -145,3 +145,52 @@ img{
 #content.active{
   margin-right: 300px;
 }
+
+@media (max-width:480px){
+  .filters{
+    background: #fffcf4;
+    width: 270px;
+    height: 100%;
+    padding-left: 50px;
+    font-family: 'Poppins', sans-serif;
+    float: left;
+    position: fixed;
+    font-size: 20px;}
+
+  #content.active{
+    margin-right: 0px;}
+
+  .wrap{
+    width: 80%;}
+
+  #sidebar{
+    position: fixed;
+    width: 600px;
+    height: 95%;
+    background: #fffcf4;
+    right: -610px;
+    transition: .4s;
+    overflow: hidden;
+    z-index: 4;
+    top: 80px;}
+  .table-container .icon {
+    font-size: 45px;
+    margin-left: 40px;}
+
+  .table-container .text {
+    font-family: 'Inter', sans-serif;
+    text-align: left;
+    font-size: 45px;}
+
+  #content.shrink{
+    margin-right: 0px;
+    margin-bottom: 0px;}
+  .job-lent{
+    width: 90%;
+    height: 10%;
+    background-color: white;
+    border-radius: 20px;
+    box-shadow: 0 0 10px rgba(0,0,0,0.5);
+    position: relative;
+    margin-bottom: 50px;}
+}

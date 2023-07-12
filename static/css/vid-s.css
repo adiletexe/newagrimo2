@@ -189,3 +189,46 @@ img{
 #main.active > .prev{
   height: 300px;
 }
+
+@media (max-width:480px){
+  .prev{
+    margin-left: 6%;
+    height: 400px;
+    width: 40%;
+    border-radius: 20px;
+    background-color: white;
+    box-shadow: 0 0 10px rgba(0,0,0,0.5);
+    position: relative;
+    float: left;
+    margin-bottom: 60px;
+    transition: .4s;}
+
+  #sidebar{
+    position: fixed;
+    width: 600px;
+    height: 95%;
+    background: #fffcf4;
+    right: -610px;
+    transition: .4s;
+    overflow: hidden;
+    z-index: 4;
+    top: 80px;}
+
+  .table-container .icon {
+    font-size: 45px;
+    margin-left: 40px;}
+
+  .table-container .text {
+    font-family: 'Inter', sans-serif;
+    text-align: left;
+    font-size: 45px;}
+
+  #content.shrink{
+    margin-right: 0px;
+    margin-bottom: 0px;}
+  #main.active{
+    margin-right: 0px;}
+
+  #main.active > .prev{
+    height: 400px;}
+}
