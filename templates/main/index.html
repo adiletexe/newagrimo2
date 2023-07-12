@@ -32,20 +32,7 @@
 		</header>
 		<section>
 			<h1 class="title-main"><b>Возможности Agrimo</b></h1>
-			<div class="desd">
-				<div class="dushnila">
-					bla
-				</div>
-				<div class="dushnila">
-					bla
-				</div>
-				<div class="dushnila">
-					bla
-				</div>
-				<div class="dushnila">
-					bla
-				</div>
-			</div>
+
 			<h1 class="title-main"><b>Наши преимущества</b></h1>
 		</section>
 	</div>
@@ -58,7 +45,7 @@
       </tr>
       <tr>
         <td><i class="fa fa-user icon" aria-hidden="true"></i></td>
-        <td class="text"><a href="#">Личный кабинет</a></td>
+        <td class="text"><a href="{% url 'index' %}">Личный кабинет</a></td>
       </tr>
       <tr>
         <td><i class="fa fa-area-chart icon" aria-hidden="true"></i></td>
@@ -66,11 +53,11 @@
       </tr>
       <tr>
         <td><i class="fa fa-area-chart icon" aria-hidden="true"></i></td>
-        <td class="text"><a href="{% url 'graphspredict' param='week' %}">Прогнозы ИИ</a></td>
+        <td class="text"><a href="{% url 'graphspredict' param='week' %}">Пронозы ИИ</a></td>
       </tr>
       <tr>
         <td><i class="fa fa-map-marker icon" aria-hidden="true"></i></td>
-        <td class="text"><a href="{% url 'geolocation' %}">Геолокация</a></td>
+        <td class="text"><a href="#">Геолокация</a></td>
       </tr>
       <tr>
         <td><i class="fa fa-briefcase icon" aria-hidden="true"></i></td>
