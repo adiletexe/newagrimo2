@@ -28,9 +28,6 @@ DEBUG = True
 
 ALLOWED_HOSTS = ["*"]
 
-CSRF_TRUSTED_ORIGINS = [
-    'https://newagrimo2-production.up.railway.app',
-]
 
 # Application definition
 
@@ -42,7 +39,6 @@ INSTALLED_APPS = [
     'django.contrib.messages',
     'django.contrib.staticfiles',
     'main',
-    'whitenoise.runserver_nostatic',
 ]
 
 MIDDLEWARE = [
@@ -53,7 +49,6 @@ MIDDLEWARE = [
     'django.contrib.auth.middleware.AuthenticationMiddleware',
     'django.contrib.messages.middleware.MessageMiddleware',
     'django.middleware.clickjacking.XFrameOptionsMiddleware',
-    "whitenoise.middleware.WhiteNoiseMiddleware",
 ]
 
 ROOT_URLCONF = 'newagrimo.urls'
@@ -82,15 +77,10 @@ WSGI_APPLICATION = 'newagrimo.wsgi.application'
 
 DATABASES = {
     'default': {
-        'ENGINE': 'django.db.backends.postgresql',
-        'NAME': 'railway',
-        'USER': 'postgres',
-        'PASSWORD': 'BHtKtAZDEMZQGAycWywo',
-        'HOST': 'containers-us-west-120.railway.app',
-        'PORT': '5480',
+        'ENGINE': 'django.db.backends.sqlite3',
+        'NAME': BASE_DIR / 'db.sqlite3',
     }
 }
-
 
 # Password validation
 # https://docs.djangoproject.com/en/4.1/ref/settings/#auth-password-validators
@@ -130,11 +120,9 @@ STATICFILES_DIRS = [
     BASE_DIR / "static",
 ]
 
-STATIC_URL = '/static/'
-STATIC_ROOT = os.path.join(BASE_DIR, 'static')
-STATICFILES_STORAGE="whitenoise.storage.CompressedManifestStaticFilesStorage"
-
+STATIC_URL = 'static/'
 MEDIA_URL = '/images/'
+STATIC_ROOT = BASE_DIR / 'staticfiles'
 MEDIA_ROOT = BASE_DIR / 'static/main/images'
 
 # Default primary key field type

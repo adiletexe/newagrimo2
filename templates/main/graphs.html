@@ -31,7 +31,7 @@
       </tr>
       <tr>
         <td><i class="fa fa-user icon" aria-hidden="true"></i></td>
-        <td class="text"><a href="#">Личный кабинет</a></td>
+        <td class="text"><a href="{% url 'index' %}">Личный кабинет</a></td>
       </tr>
       <tr>
         <td><i class="fa fa-area-chart icon" aria-hidden="true"></i></td>
@@ -39,7 +39,7 @@
       </tr>
       <tr>
         <td><i class="fa fa-area-chart icon" aria-hidden="true"></i></td>
-        <td class="text"><a href="{% url 'graphspredict' param='week' %}">Прогнозы ИИ</a></td>
+        <td class="text"><a href="{% url 'graphspredict' param='min' %}">Прогнозы ИИ</a></td>
       </tr>
       <tr>
         <td><i class="fa fa-map-marker icon" aria-hidden="true"></i></td>
@@ -101,7 +101,7 @@
       <div class="desc-stat">
         <div class="title-stat">
           <p>Статистика</p>
-          <h5>Свет</h5>
+          <h5>Воспламенение</h5>
         </div>
         <select id="time" name="time" form="time">
           <option value="month">Месяц</option>
@@ -580,10 +580,45 @@
     new Chart(ctx5, config5);
 
 
+    const canvasElements = document.getElementsByTagName('canvas');
+
+        for (let i = 0; i < canvasElements.length; i++) {
+            const canvasId = canvasElements[i].getAttribute('id');
+            if (canvasId === 'myLineChart1' || canvasId === 'myLineChart2' || canvasId === 'myBarChart' || canvasId === 'myBarChart1') {
+                if (document.getElementById('main').classList.contains('shrink')) {
+                    canvasElements[i].style.width = '94%';
+                    canvasElements[i].style.height = '80%';
+                }
+                else {
+                    canvasElements[i].style.width = '94%';
+                    canvasElements[i].style.height = '80%';
+                }
+            }
+            else if (canvasId === 'myLineChart' || canvasId === 'myLineChart3') {
+                if (document.getElementById('main').classList.contains('shrink')) {
+                    canvasElements[i].style.width = '94%';
+                    canvasElements[i].style.height = '70%';
+                }
+                else {
+                    canvasElements[i].style.width = '94%';
+                    canvasElements[i].style.height = '70%';
+                }
+            }
+        }
     function show() {
-      document.getElementById('sidebar').classList.toggle('active');
-      document.getElementById('main').classList.toggle('shrink');
-      adjustCanvasSize();
+        var sidebar = document.getElementById('sidebar');
+        var content = document.getElementById('main');
+        var buttonIcon = document.querySelector('#but i');
+        adjustCanvasSize();
+        sidebar.classList.toggle('active');
+        content.classList.toggle('shrink');
+        if (buttonIcon.classList.contains('fa-bars')) {
+            buttonIcon.classList.remove('fa-bars');
+            buttonIcon.classList.add('fa-times');
+        } else {
+            buttonIcon.classList.remove('fa-times');
+            buttonIcon.classList.add('fa-bars');
+        }
     }
 
     function adjustCanvasSize() {
@@ -593,18 +628,22 @@
             const canvasId = canvasElements[i].getAttribute('id');
             if (canvasId === 'myLineChart1' || canvasId === 'myLineChart2' || canvasId === 'myBarChart' || canvasId === 'myBarChart1') {
                 if (document.getElementById('main').classList.contains('shrink')) {
-                    canvasElements[i].style.width = '580px';
+                    canvasElements[i].style.width = '94%';
+                    canvasElements[i].style.height = '60%';
                 }
                 else {
-                    canvasElements[i].style.width = '700px';
+                    canvasElements[i].style.width = '94%';
+                    canvasElements[i].style.height = '60%';
                 }
             }
             else if (canvasId === 'myLineChart' || canvasId === 'myLineChart3') {
                 if (document.getElementById('main').classList.contains('shrink')) {
-                    canvasElements[i].style.width = '1400px';
+                    canvasElements[i].style.width = '94%';
+                    canvasElements[i].style.height = '60%';
                 }
                 else {
-                    canvasElements[i].style.width = '1650px';
+                    canvasElements[i].style.width = '94%';
+                    canvasElements[i].style.height = '60%';
                 }
             }
         }

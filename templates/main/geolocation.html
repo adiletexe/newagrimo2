@@ -1,7 +1,7 @@
+{% extends 'main/layout.html' %}
 {% load static %}
 
-<html>
-<head>
+{% block style %}
 	<link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300&display=swap" rel="stylesheet">
 	<link href="https://fonts.googleapis.com/css2?family=Inter:wght@600&display=swap" rel="stylesheet">
 	<link rel="stylesheet" href="{% static 'css/home-d1.css' %}">
@@ -14,100 +14,49 @@
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/leaflet.draw/1.0.4/leaflet.draw.css" />
     <script src="https://cdnjs.cloudflare.com/ajax/libs/leaflet.draw/1.0.4/leaflet.draw.js"></script>
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <style>
-    #map {
-      position: absolute;
-      top: 200px;
-      right: 0;
-      bottom: 200px;
-      left: 0;
-      height: 50vh;
-    }
-  </style>
-</head>
-<body>
-	<div class="navbar">
-			<ul class="navbar-l">
-				<li class="navbar-i">AGRIMO
-				</li>
-				<li class="navbar-i" id="but"><button onclick ="show()"></button>
-				</li>
-				<li class="navbar-i" style="float: right;">Помощь
-				</li>
-				<li class="navbar-i" style="float: right;">Профиль
-				</li>
-			</ul>
-		</div>
+    <title>Карта</title>
+{% endblock %}
+{% block content %}
 	<div class="wrapper">
+        <h1>Локация вашей метеостанции</h1>
         <form method="POST" action="{% url 'geolocation' %}">
             {% csrf_token %}
             <input type="text" name="lat"> Latitude
             <br>
             <input type="text" name="long"> Longitude
             <br>
-            <button type="submit">Сохранить</button>
+            <input type="submit">Сохранить</input>
         </form>
-        <h1>Локация вашей метеостанции</h1>
+        <form method="POST" action="{% url 'startif' %}">
+        {% csrf_token %}
+            <button type="submit"><p>Запустить метеостанцию</p></button>
+        </form>
+        <br>
+        <form method="POST" action="{% url 'endif' %}">
+        {% csrf_token %}
+            <button type="submit"><p>Остановить метеостанцию</p></button>
+        </form>
         <div id="map"></div>
         <form method="POST" action="{% url 'add_shape' %}">
         {% csrf_token %}
         <input type="hidden" name="drawn_shapes[]" id="drawn-shapes-input">
-        <button type="submit">Сохранить Черчения</button>
-</form>
+        <button type="submit"><p>Сохранить Черчения</p><i class="fa fa-check" aria-hidden="true"></i></button>
+        </form>
+
+        <br>
 	</div>
-
-<div id="sidebar">
-  <div class="table-container">
-    <table>
-      <tr>
-        <td><i class="fa fa-home icon" aria-hidden="true"></i></td>
-        <td class="text"><a href="{% url 'index' %}">Главная</a></td>
-      </tr>
-      <tr>
-        <td><i class="fa fa-user icon" aria-hidden="true"></i></td>
-        <td class="text"><a href="#">Личный кабинет</a></td>
-      </tr>
-      <tr>
-        <td><i class="fa fa-area-chart icon" aria-hidden="true"></i></td>
-        <td class="text"><a href="{% url 'graphs' param='week' %}">Мониторинг урожая</a></td>
-      </tr>
-      <tr>
-        <td><i class="fa fa-area-chart icon" aria-hidden="true"></i></td>
-        <td class="text"><a href="{% url 'graphspredict' param='week' %}">Прогнозы ИИ</a></td>
-      </tr>
-      <tr>
-        <td><i class="fa fa-map-marker icon" aria-hidden="true"></i></td>
-        <td class="text"><a href="{% url 'geolocation' %}">Геолокация</a></td>
-      </tr>
-      <tr>
-        <td><i class="fa fa-briefcase icon" aria-hidden="true"></i></td>
-        <td class="text"><a href="{% url 'specialists' %}">Список вакансий</a></td>
-      </tr>
-      <tr>
-        <td><i class="fa fa-calendar icon" aria-hidden="true"></i></td>
-        <td class="text"><a href="#">Мероприятия</a></td>
-      </tr>
-      <tr>
-        <td><i class="fa fa-shopping-cart icon" aria-hidden="true"></i></td>
-        <td class="text"><a href="{% url 'shop' %}">Магазин</a></td>
-      </tr>
-      <tr>
-        <td><i class="fa fa-book icon" aria-hidden="true"></i></td>
-        <td class="text"><a href="{% url 'education' %}">Образовка</a></td>
-      </tr>
-      <tr>
-        <td><i class="fa fa-cog icon" aria-hidden="true"></i></td>
-        <td class="text"><a href="#">Настройки</a></td>
-      </tr>
-    	</table>
-  </div>
-</div>
-    <script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyBUw2Y59tuLTbBjptXWD0cQTgmZ8JLqoXw"></script>
-	<script>
-        function show() {
-        document.getElementById('sidebar').classList.toggle('active');
-        }
-
+    <form method="POST" action="{% url 'startif' %}">
+        {% csrf_token %}
+            <button class= "mete" type="submit"><p>Запустить метеостанцию</p></button>
+        </form>
+    <br>
+    <form method="POST" action="{% url 'endif' %}">
+        {% csrf_token %}
+            <button class= "mete" type="submit" style="left: 1100px; width: 200px;"><p>Остановить метеостанцию</p></button>
+    </form>
+{% endblock %}
+    {% block dscript %}<script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyBUw2Y59tuLTbBjptXWD0cQTgmZ8JLqoXw"></script>{% endblock %}
+{% block script %}
         const key = 'iCRDXEEMTLDhCmkDfPu5';
 
         {% if not lat %}
@@ -171,9 +120,5 @@
 
             geojsonLayer.bindPopup(hideButton);
         });
-
-
-    </script>
-</body>
-</html>
+{% endblock %}
 

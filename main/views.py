@@ -14,8 +14,13 @@ from django.db.models import Q
 import openai
 from geopy.geocoders import Nominatim
 from django.http import JsonResponse
+import threading
+import socket
+# import serial
+import time
+from random import randint
 
-openai.api_key = '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'
+openai.api_key = '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'
 
 def get_coordinates(address):
     geolocator = Nominatim(user_agent="my_geocoder")
@@ -26,17 +31,159 @@ def get_coordinates(address):
         longitude = location.longitude
         return latitude, longitude
     elif location := geolocator.geocode(address, exactly_one=False):
-        # Use the first close match found
         latitude = location[0].latitude
         longitude = location[0].longitude
         return latitude, longitude
     else:
         return None
 
+
+
+# class SensorDataRetriever:
+#     def _init_(self, server_ip="192.168.1.103", server_port=8080):
+#         self.server_ip = server_ip
+#         self.server_port = server_port
+#         self.tcp_socket = socket.socket(socket.AF_INET, socket.SOCK_STREAM)
+#         self.tcp_socket.bind((self.server_ip, self.server_port))
+#         self.tcp_socket.listen(1)
+
+#     def process_sensor_data(self, data):
+#         sensor_values = data.split(",")
+#         flame_value = int(sensor_values[0])
+#         rain_value = int(sensor_values[1])
+#         light_value = int(sensor_values[2])
+#         soil_moisture_value = int(sensor_values[3])
+#         ammonia_value = int(sensor_values[4])
+#         air_humidity_value = int(sensor_values[5])
+
+#         update_min_values()
+#         print("Updated Min")
+
+#         update_day_values()
+#         print("Updated Day")
+
+
+#     def handle_client(self, client_socket, client_address):
+#         print("Client connected:", client_address)
+
+#         data = client_socket.recv(1024).decode()
+#         print("Received sensor data:", data)
+
+#         self.process_sensor_data(data)
+#         client_socket.close()
+
+
+# ser = serial.Serial('/dev/cu.usbserial-0001', 115200)
+
+soil_moisture_time_interval = 6
+light_time_interval = 2
+flame_ammonia_time_interval = 10
+air_humidity_time_interval = 6
+raindrop_time_interval = 6
+
+next_soil_moisture_time = time.time() + soil_moisture_time_interval
+next_light_time = time.time() + light_time_interval
+next_flame_time = time.time() + flame_ammonia_time_interval
+next_ammonia_time = time.time() + flame_ammonia_time_interval
+next_air_humidity_time = time.time() + air_humidity_time_interval
+next_raindrop_time = time.time() + raindrop_time_interval
+
+def update_min_values(model, targetminper, targetmin, user):
+    matching_model = model.objects.filter(user_id=user.id, min=targetmin).first()
+
+    if matching_model:
+        print('exists')
+        matching_model.minper = targetminper
+        matching_model.save()
+        return True
+
+def update_day_values(model, targetdayper, targetday, user):
+    matching_model = model.objects.filter(user_id=user.id, min=targetday).first()
+
+    if matching_model:
+        print('exists')
+        matching_model.minday = targetdayper
+        matching_model.save()
+        return True
+
+class SensorDataRetriever:
+    def init(self):
+        pass
+
+    def start(self, user):
+        global next_soil_moisture_time, next_light_time, next_flame_time, next_ammonia_time, next_air_humidity_time, next_raindrop_time
+        print("Reading data from the serial port")
+        counterlight = 0
+        countermoisture = 0
+        counterflame = 0
+        counterhumidity = 0
+        counterodor = 0
+        counterrain = 0
+        while True:
+            try:
+                flame_value = randint(0, 24)
+                ammonia_value = randint(800, 1200)
+                rain_value = randint(12, 21)
+                light_value = randint(511, 623)
+                soil_moisture_value = randint(12, 21)
+                air_humidity_value = randint(53, 71)
+                temperature_value = randint(23, 24)
+                pressure_value = randint(400, 800)
+
+                current_time = time.time()
+                if current_time >= next_flame_time:
+                    print("Flame Value:", flame_value)
+                    print("Temperature Value:", temperature_value)
+                    print("Odor value:", ammonia_value)
+                    print("Pressure", pressure_value)
+                    if counterflame < 61:
+                        update_min_values(Light, flame_value, counterflame, user)
+                        update_min_values(Temperature, temperature_value, counterflame, user)
+                        update_min_values(Odor, ammonia_value, counterflame, user)
+                        update_min_values(Pressure, pressure_value, counterflame, user)
+                        counterflame += 10
+
+                    next_flame_time = current_time + flame_ammonia_time_interval
+
+
+                if current_time >= next_light_time:
+                    print("Light Value:", light_value)
+                    if counterlight < 61:
+                        update_min_values(Sunradiation, light_value, counterlight, user)
+                        counterlight += 2
+                    next_light_time = current_time + light_time_interval
+
+
+                if current_time >= next_air_humidity_time:
+                    print("Air Humidity Value:", air_humidity_value, "%")
+                    print("Raindrop Value:", rain_value, "%")
+                    print("Moisture Value:", soil_moisture_value, "%")
+                    if counterhumidity < 61:
+                        update_min_values(Humidity, air_humidity_value, counterhumidity, user)
+                        update_min_values(Raindrop, rain_value, counterhumidity, user)
+                        update_min_values(Moisture, soil_moisture_value, counterhumidity, user)
+                        counterhumidity += 6
+                    next_air_humidity_time = current_time + air_humidity_time_interval
+
+            except KeyboardInterrupt:
+                break
+
+
+def startif(request):
+    retriever = SensorDataRetriever()
+    retrieving_thread = threading.Thread(target=retriever.start, args=(request.user,))
+    retrieving_thread.daemon = True
+    retrieving_thread.start()
+    return redirect('geolocation')
+
+def endif(request):
+    return redirect('geolocation')
+
 @transaction.atomic
 def index(request):
     context = {}
     return render(request, 'main/index.html', context)
+
 
 @login_required()
 def graphs(request, param):
@@ -83,7 +230,7 @@ def graphs(request, param):
                'interval': param,
                }
 
-    print(light_data)
+    print(temperature_data)
     print(humidity_data)
     print(sunradiation_data)
 
@@ -184,6 +331,7 @@ def geolocation(request):
         userprofile.geolocation1 = str(lat)
         userprofile.geolocation2 = str(long)
         userprofile.save()
+
     else:
         if userprofile.geolocation1:
             lat = float(userprofile.geolocation1)
@@ -238,6 +386,25 @@ def specialists(request):
 def education(request):
     context = {}
     return render(request, 'main/education.html', context)
+
+def events(request):
+    context = {}
+    return render(request, 'main/events.html', context)
+
+def profileo(request):
+    userprofile = UserProfile.objects.get(user = request.user)
+    context = {'userprofile' : userprofile}
+    return render(request, 'main/profile-owner.html', context)
+
+def change(request):
+    if request.method == "POST":
+        userprofile = UserProfile.objects.get(user=request.user)
+        userprofile.city= request.POST['city']
+        userprofile.region = request.POST['region']
+        userprofile.farm = request.POST['farm']
+        
+
+    return redirect('profileo')
 
 def loginsystem(request):
     if request.method == "GET":
@@ -565,7 +732,7 @@ def signupsystem(request):
                         user_profile.pressure.add(pressure)
 
                     user_profile.save()
-                    return redirect('graphsai')
+                    return redirect('profileo')
                 else:
                     specialist = Specialists.objects.create(user=request.user)
                     specialist.fullname = str(request.POST['name']) + " " + str(request.POST['lastname'])

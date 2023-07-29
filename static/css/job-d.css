@@ -1,90 +1,7 @@
-#sidebar.active {
-  right: 0;
-  overflow: auto;
-}
-#content {
-  z-index: 1;
-  transition: .4s;
-}
 body{
   padding: 0;
   margin: 0;
-}
-
-#sidebar.active {
-  right: 0;
-  overflow: auto;
-}
-
-#sidebar {
-  position: fixed;
-  width: 300px;
-  height: 90%;
-  background: #fffcf4;
-  right: -310px;
-  transition: .4s;
-  overflow: hidden;
-  z-index: 4;
-  top: 80px;
-}
-
-.table-container {
-  width: 100%;
-}
-
-.table-container table {
-  border-collapse: collapse;
-  width: 100%;
-  height: 100%;
-}
-
-.table-container td {
-  padding: 10px;
-  text-align: center;
-}
-
-.table-container .icon {
-  font-size: 120%;
-  margin-left: 40px;
-}
-
-.table-container .text {
-  font-family: 'Inter', sans-serif;
-  text-align: left;
-  font-size: 120%;
-}
-.table-container .text a {
-  text-decoration: none;
-  color: black;
-}
-
-.navbar {
-  z-index: 1;
-  overflow-y: hidden;
-
-}
-
-.navbar {
-  padding: 0px;
-  margin: 0px;
-  background-color: #303404;
-  height: 80px;
-  position: fixed;
-  top: 0;
-  right: 0;
-  left: 0;
-}
-
-.navbar-l {
-  list-style: none;
-}
-
-.navbar-i {
-  margin: 10px;
-  display: inline-block;
-  font-family: 'Poppins', sans-serif;
-  color: white;
-  font-size: 20px;
+  overflow-x: hidden;
 }
 
 .filters{
@@ -117,16 +34,18 @@ body{
 
 .job-lent{
   width: 100%;
-  height: 20%;
+  height: 200px;
   background-color: white;
   border-radius: 20px;
   box-shadow: 0 0 10px rgba(0,0,0,0.5);
   position: relative;
   margin-bottom: 50px;
+  transition: .4s;
 }
 
 img{
   float: left;
+  margin-top: 20px;
 }
 .stats{
   list-style: none;
@@ -140,57 +59,66 @@ img{
   top: 20px;
   color: lightgray;
 }
+#content{transition: .4s;}
 
 
-#content.active{
+#content.shrink{
   margin-right: 300px;
 }
 
 @media (max-width:480px){
   .filters{
-    background: #fffcf4;
-    width: 270px;
-    height: 100%;
-    padding-left: 50px;
-    font-family: 'Poppins', sans-serif;
-    float: left;
-    position: fixed;
-    font-size: 20px;}
+  background: #fffcf4;
+  width: 100px;
+  height: 100%;
+  padding-left: 10px;
+  font-family: 'Poppins', sans-serif;
+  float: left;
+  position: fixed;
+  font-size: 10px;
+}
 
-  #content.active{
-    margin-right: 0px;}
+.filters h1{margin-top: 80px;}
 
-  .wrap{
-    width: 80%;}
+.job-lent{
+  width: 80%;
+  height: 200px;
+  background-color: white;
+  border-radius: 20px;
+  box-shadow: 0 0 10px rgba(0,0,0,0.5);
+  position: relative;
+  margin-bottom: 50px;
+  transition: .4s;
+  margin-right: 0px;
+  margin-left: 10px;
+}
+#content{
+    width: 100%;
+}
+.lenta{
+  margin-left: 110px;
+  float: left;
+  font-family: 'Poppins', sans-serif;
+  height: 100%;
+  width: calc(100% - 120px);
+}
+.rating{
+  position: absolute;
+  right: 20px;
+  top: 160px;
+  color: lightgray;
+  font-size: 10px;
+}
+.lenta h1{
+    font-size: 20px;
+    margin-left: 10px;
+    margin-top: 80px;
+}
 
-  #sidebar{
-    position: fixed;
-    width: 600px;
-    height: 95%;
-    background: #fffcf4;
-    right: -610px;
-    transition: .4s;
-    overflow: hidden;
-    z-index: 4;
-    top: 80px;}
-  .table-container .icon {
-    font-size: 45px;
-    margin-left: 40px;}
-
-  .table-container .text {
-    font-family: 'Inter', sans-serif;
-    text-align: left;
-    font-size: 45px;}
-
-  #content.shrink{
-    margin-right: 0px;
-    margin-bottom: 0px;}
-  .job-lent{
-    width: 90%;
-    height: 10%;
-    background-color: white;
-    border-radius: 20px;
-    box-shadow: 0 0 10px rgba(0,0,0,0.5);
-    position: relative;
-    margin-bottom: 50px;}
+.stats{
+    font-size: 10px;
+}
+#content.shrink{
+  margin-right: 0px;
+}
 }

@@ -3,7 +3,7 @@
   height:80%;
   width: 50%;
   position: absolute;
-  top: 45%;
+  top: 40%;
   left: 50%;
   -ms-transform: translate(-50%, -50%);
   transform: translate(-50%, -50%);
@@ -21,7 +21,7 @@ header{
 }
 
 body {
-  background-image: url('bg.png');
+  background-image: url('https://ssm22.ru/wp-content/uploads/2017/05/tarwe_oogst-1024x669.jpg');
   background-size: cover;
   position: relative;
 }

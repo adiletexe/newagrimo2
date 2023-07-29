@@ -3,10 +3,16 @@
   overflow: auto;
 }
 
+#content{
+    opacity: 0;
+    transition: opacity .5s ease-in-out;
+}
+
+
 #sidebar {
   position: fixed;
   width: 300px;
-  height: 100%;
+  height: calc(100% - 80px);
   background: #fffcf4;
   right: -310px;
   transition: .4s;
@@ -22,7 +28,7 @@
 .table-container table {
   border-collapse: collapse;
   width: 100%;
-  height: 650px;
+  height: 100%;
 }
 
 .table-container td {
@@ -31,14 +37,14 @@
 }
 
 .table-container .icon {
-  font-size: 22px;
+  font-size: 120%;
   margin-left: 40px;
 }
 
 .table-container .text {
   font-family: 'Inter', sans-serif;
   text-align: left;
-  font-size: 22px;
+  font-size: 120%;
 }
 .table-container .text a {
   text-decoration: none;
@@ -47,18 +53,28 @@
 
 body {
   margin: 0px;
+
+}
+
+#but i {
+  transition: transform 0.3s ease-in-out;
+}
+
+#but i.fa-times {
+  transform: rotate(90deg);
 }
 
 .navbar {
-  z-index: 1;
-  overflow: hidden;
-}
-
-.navbar {
+  position: fixed;
+  left: 0;
+  right: 0;
+  top: 0;
   padding: 0px;
   margin: 0px;
   background-color: #303404;
   height: 80px;
+  z-index: 1;
+  overflow: hidden;
 }
 
 .navbar-l {
@@ -71,12 +87,6 @@ body {
   font-family: 'Poppins', sans-serif;
   color: white;
   font-size: 20px;
-}
-
-header {
-  position: relative;
-  display: flex;
-  height: 100%;
 }
 
 #but {
@@ -107,4 +117,62 @@ header {
 #sidebar .table-container table tr:hover {
   background-color: white;
   box-shadow: 0 0 10px rgba(0,0,0,0.5);
+}
+
+@media (max-width:480px){
+
+  .navbar {
+    padding: 0px;
+    margin: 0px;
+    background-color: #303404;
+    height: 60px;
+    z-index: 1;
+    overflow: hidden;}
+
+  .navbar-l {
+    list-style: none;
+    padding-left: 5px;}
+
+  .navbar-i {
+    margin: 10px;
+    display: inline-block;
+    font-family: 'Poppins', sans-serif;
+    color: white;
+    font-size: 10px;}
+
+  .table-container .icon {
+    font-size: 45px;
+    margin-left: 40px;}
+
+  .table-container .text {
+    font-family: 'Inter', sans-serif;
+    text-align: left;
+    font-size: 45px;}
+
+  #sidebar {
+    position: fixed;
+    width: 350px;
+    height: calc(100% - 60px);
+    background: #fffcf4;
+    right: -360px;
+    transition: .4s;
+    overflow: hidden;
+    z-index: 4;
+    top: 60px;}
+
+  .table-container .icon {
+    font-size: 20px;
+    margin-left: 40px;}
+
+  .table-container .text {
+    font-family: 'Inter', sans-serif;
+    text-align: left;
+    font-size: 20px;}
+
+  #but {
+    margin-top: 2px;
+    float: right;
+    height: 30.4px;
+    width: 30.4px;
+    justify-content: center;}
 }
