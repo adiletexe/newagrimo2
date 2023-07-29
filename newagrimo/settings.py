@@ -28,6 +28,9 @@ DEBUG = True
 
 ALLOWED_HOSTS = ["*"]
 
+CSRF_TRUSTED_ORIGINS = [
+    'https://newagrimo2-production.up.railway.app',
+]
 
 # Application definition
 
