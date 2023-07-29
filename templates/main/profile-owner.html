@@ -1,0 +1,46 @@
+{% extends 'main/layout.html' %}
+{% load static %}
+
+{% block style %}
+  <title>Профиль</title>
+  <link rel="stylesheet" href="{% static 'css/po-d.css' %}">
+{% endblock %}
+
+{% block content %}
+  <div id="ava">
+    <img src="https://cdn-icons-png.flaticon.com/512/3135/3135715.png" width="100%" height="100%">
+  </div>
+  <div id="prof">
+    <h1>{{request.user.first_name}}</h1>
+    <p>{{userprofile.profession}}</p>
+    <p>{{userprofile.telephone}}</p>
+    <div id="edit">
+      <button style="margin-right: 15px;" id="ed" onclick="toggleReadonly()"><span id="iz">Изменить</span><i class="fa fa-pencil" aria-hidden="true"></i></button>
+      <button><span>Настройки</span><i class="fa fa-cog" aria-hidden="true"></i></button>
+    </div>
+  </div>
+  <div id="description">
+    <div id="contdes">
+      <h1>Личные данные:</h1>
+      <form id="data" action="{% url 'change' %}" method="POST">
+        <div>
+          <p>Электронная почта</p>
+          <input id = "email" type="username" value="waw" readonly>
+        </div>
+        <div id="ci">
+          <p>Город</p>
+          <input id = "city" type="city" value="waw" readonly>
+        </div>
+        <div id="re">
+          <p>Регион</p>
+          <input id = "reg" type="region" value="waw" readonly>
+        </div>
+        <div id="fer">
+          <p>Ферма</p>
+          <input id = "farm" type="farm" value="waw" readonly>
+        </div>
+        <button id="sub">Сохранить</button>
+      </form>
+    </div>
+  </div>
+{% endblock %}

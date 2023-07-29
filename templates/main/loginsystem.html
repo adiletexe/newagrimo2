@@ -8,7 +8,7 @@
 	<link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@500&display=swap" rel="stylesheet">
 	<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
 </head>
-<body style="background-image: url('{% static 'images/bg.png' %}'); background-size: cover; position: relative;">
+<body style="">
 	<header>
 		AGRIMO
 	</header>
@@ -50,8 +50,12 @@
   			var x = document.getElementById("hid");
   			if (x.type === "password") {
     			x.type = "text";
+    			document.querySelector('i').classList.remove('fa-eye');
+            	document.querySelector('i').classList.add('fa-eye-slash');
   			} else {
     			x.type = "password";
+    			document.querySelector('i').classList.remove('fa-eye-slash');
+            	document.querySelector('i').classList.add('fa-eye');
   			}
 		}
 </script>

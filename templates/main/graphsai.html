@@ -1,5 +1,4 @@
 {% load static %}
-
 <html>
 <head>
 	<link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300&display=swap" rel="stylesheet">
@@ -8,13 +7,16 @@
 	<link href="https://fonts.googleapis.com/css2?family=Inter:wght@600&display=swap" rel="stylesheet">
 	<link rel="stylesheet" href="{% static 'css/st-s.css' %}">
     <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+    <link rel="icon" type="image/x-icon" href="{% static 'images/icon.png' %}">
+    <meta content="width=device-width, initial-scale=1" name="viewport" />
+    <title>Прогноз</title>
 </head>
 <body>
 	<div class="navbar">
 		<ul class="navbar-l">
 			<li class="navbar-i">AGRIMO
 			</li>
-			<li class="navbar-i" id = "but"><button onclick ="show()"></button>
+			<li class="navbar-i" id = "but"><button onclick ="show()"><i class="fa fa-bars" aria-hidden="true" style="color:white;"></i></button>
 			</li>
 			<li class="navbar-i" style="float: right;"><a href="#">Помощь</a>
 			</li>
@@ -31,7 +33,7 @@
       </tr>
       <tr>
         <td><i class="fa fa-user icon" aria-hidden="true"></i></td>
-        <td class="text"><a href="#">Личный кабинет</a></td>
+        <td class="text"><a href="{% url 'index' %}">Личный кабинет</a></td>
       </tr>
       <tr>
         <td><i class="fa fa-area-chart icon" aria-hidden="true"></i></td>
@@ -39,7 +41,7 @@
       </tr>
       <tr>
         <td><i class="fa fa-area-chart icon" aria-hidden="true"></i></td>
-        <td class="text"><a href="{% url 'graphspredict' param='week' %}">Прогнозы ИИ</a></td>
+        <td class="text"><a href="{% url 'graphspredict' param='week' %}">Пронозы ИИ</a></td>
       </tr>
       <tr>
         <td><i class="fa fa-map-marker icon" aria-hidden="true"></i></td>
@@ -51,7 +53,7 @@
       </tr>
       <tr>
         <td><i class="fa fa-calendar icon" aria-hidden="true"></i></td>
-        <td class="text"><a href="#">Мероприятия</a></td>
+        <td class="text"><a href="/events">Мероприятия</a></td>
       </tr>
       <tr>
         <td><i class="fa fa-shopping-cart icon" aria-hidden="true"></i></td>
@@ -68,8 +70,15 @@
     	</table>
   	</div>
 	</div>
-  <div id="main">
+    <div id="step"></div>
 
+  <div id="main">
+    <div class="annow">
+      <h1>Скорее всего у вас заражение урожая!</h1>
+    </div>
+    <div class="annow">
+      <h1>Ожидается Засуха!</h1>
+    </div>
     <h1 id="title-f">Мониторинг урожая</h1>
     <div id="switcher">
       <ul>
@@ -101,7 +110,7 @@
       <div class="desc-stat">
         <div class="title-stat">
           <p>Статистика</p>
-          <h5>Свет</h5>
+          <h5>Воспламенение</h5>
         </div>
         <select id="time" name="time" form="time">
           <option value="month">Месяц</option>
@@ -111,7 +120,7 @@
         </select>
         <hr>
       </div>
-      <canvas id="myLineChart2" width="700" height="480"></canvas>
+      <canvas id="myLineChart2" width="700px" height="480px"></canvas>
     </div>
     <div class="long-stat">
       <div class="desc-stat-l">
@@ -142,7 +151,7 @@
           <option value="day">День</option>
         </select>
         <hr>
-      </div>
+      </div>3
       <canvas id="myBarChart" width="700" height="480"></canvas>
     </div>
     <div class="small-stat">
@@ -177,12 +186,13 @@
       </div>
        <canvas id="myLineChart3" width="1650" height="470"></canvas>
     </div>
-    <div id="prognoz">
-      <h1 id="title-f" style="color: white;">Прогнозы ИИ</h1>
-      <hr id="footer">
-    </div>
   </div>
   <script>
+
+    window.addEventListener('DOMContentLoaded', function() {
+        var container = document.getElementById('main');
+        container.style.opacity = 1;
+    });
     const datasets = [
       {
         label: 'Humidity',
@@ -235,7 +245,7 @@
     ];
     const dataset2 = [
       {
-        label: 'Light',
+        label: 'Flame',
         borderColor: '#FFCE79',
         data: [150, 243, 324, 281, 288, 129, 184],
         fill: true,
@@ -510,11 +520,45 @@
     const ctx5 = document.getElementById('myLineChart3').getContext('2d');
     new Chart(ctx5, config5);
 
+    const canvasElements = document.getElementsByTagName('canvas');
 
+        for (let i = 0; i < canvasElements.length; i++) {
+            const canvasId = canvasElements[i].getAttribute('id');
+            if (canvasId === 'myLineChart1' || canvasId === 'myLineChart2' || canvasId === 'myBarChart' || canvasId === 'myBarChart1') {
+                if (document.getElementById('main').classList.contains('shrink')) {
+                    canvasElements[i].style.width = '94%';
+                    canvasElements[i].style.height = '80%';
+                }
+                else {
+                    canvasElements[i].style.width = '94%';
+                    canvasElements[i].style.height = '80%';
+                }
+            }
+            else if (canvasId === 'myLineChart' || canvasId === 'myLineChart3') {
+                if (document.getElementById('main').classList.contains('shrink')) {
+                    canvasElements[i].style.width = '94%';
+                    canvasElements[i].style.height = '70%';
+                }
+                else {
+                    canvasElements[i].style.width = '94%';
+                    canvasElements[i].style.height = '70%';
+                }
+            }
+        }
     function show() {
-        document.getElementById('sidebar').classList.toggle('active');
-        document.getElementById('main').classList.toggle('shrink');
+        var sidebar = document.getElementById('sidebar');
+        var content = document.getElementById('main');
+        var buttonIcon = document.querySelector('#but i');
         adjustCanvasSize();
+        sidebar.classList.toggle('active');
+        content.classList.toggle('shrink');
+        if (buttonIcon.classList.contains('fa-bars')) {
+            buttonIcon.classList.remove('fa-bars');
+            buttonIcon.classList.add('fa-times');
+        } else {
+            buttonIcon.classList.remove('fa-times');
+            buttonIcon.classList.add('fa-bars');
+        }
     }
 
     function adjustCanvasSize() {
@@ -524,18 +568,22 @@
             const canvasId = canvasElements[i].getAttribute('id');
             if (canvasId === 'myLineChart1' || canvasId === 'myLineChart2' || canvasId === 'myBarChart' || canvasId === 'myBarChart1') {
                 if (document.getElementById('main').classList.contains('shrink')) {
-                    canvasElements[i].style.width = '580px';
+                    canvasElements[i].style.width = '94%';
+                    canvasElements[i].style.height = '60%';
                 }
                 else {
-                    canvasElements[i].style.width = '700px';
+                    canvasElements[i].style.width = '94%';
+                    canvasElements[i].style.height = '60%';
                 }
             }
             else if (canvasId === 'myLineChart' || canvasId === 'myLineChart3') {
                 if (document.getElementById('main').classList.contains('shrink')) {
-                    canvasElements[i].style.width = '1400px';
+                    canvasElements[i].style.width = '94%';
+                    canvasElements[i].style.height = '60%';
                 }
                 else {
-                    canvasElements[i].style.width = '1650px';
+                    canvasElements[i].style.width = '94%';
+                    canvasElements[i].style.height = '60%';
                 }
             }
         }

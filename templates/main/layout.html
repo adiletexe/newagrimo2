@@ -1,19 +1,24 @@
-
+{% load static %}
 <html>
 <head>
 	<link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300&display=swap" rel="stylesheet">
 	<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
 	<link href="https://fonts.googleapis.com/css2?family=Gothic+A1:wght@500&display=swap" rel="stylesheet">
 	<link href="https://fonts.googleapis.com/css2?family=Inter:wght@600&display=swap" rel="stylesheet">
-	<link rel="stylesheet" href="lay-d.css">
-	{% block style%}{% endblock %}
+	<link rel="stylesheet" href="{% static 'css/lay-d.css' %}">
+    <link rel="icon" type="image/x-icon" href="{% static 'images/icon.png' %}">
+    <meta content="width=device-width, initial-scale=1" name="viewport" />
+    <meta http-equiv="cache-control" content="no-cache" />
+    <meta http-equiv="Pragma" content="no-cache" />
+    <meta http-equiv="Expires" content="-1" />
+	{% block style %}{% endblock %}
 </head>
 <body>
 	<div class="navbar">
 		<ul class="navbar-l">
 			<li class="navbar-i">AGRIMO
 			</li>
-			<li class="navbar-i" id = "but"><button onclick ="show()"></button>
+			<li class="navbar-i" id = "but"><button onclick ="show()"><i class="fa fa-bars" aria-hidden="true" style="color:white;"></i></button>
 			</li>
 			<li class="navbar-i" style="float: right;"><a href="#">Помощь</a>
 			</li>
@@ -26,35 +31,39 @@
     	<table>
       <tr>
         <td><i class="fa fa-home icon" aria-hidden="true"></i></td>
-        <td class="text"><a href="#">Главная</a></td>
+        <td class="text"><a href="{% url 'index' %}">Главная</a></td>
       </tr>
       <tr>
         <td><i class="fa fa-user icon" aria-hidden="true"></i></td>
-        <td class="text"><a href="#">Личный кабинет</a></td>
+        <td class="text"><a href="{% url 'profileo' %}">Личный кабинет</a></td>
       </tr>
       <tr>
         <td><i class="fa fa-area-chart icon" aria-hidden="true"></i></td>
-        <td class="text"><a href="#">Мониторинг урожая</a></td>
+        <td class="text"><a href="{% url 'graphs' param='week' %}">Мониторинг урожая</a></td>
+      </tr>
+      <tr>
+        <td><i class="fa fa-area-chart icon" aria-hidden="true"></i></td>
+        <td class="text"><a href="{% url 'graphspredict' param='week' %}">Прогноз</a></td>
       </tr>
       <tr>
         <td><i class="fa fa-map-marker icon" aria-hidden="true"></i></td>
-        <td class="text"><a href="#">Геолокация</a></td>
+        <td class="text"><a href="/geolocation">Геолокация</a></td>
       </tr>
       <tr>
         <td><i class="fa fa-briefcase icon" aria-hidden="true"></i></td>
-        <td class="text"><a href="#">Список вакансий</a></td>
+        <td class="text"><a href="/specialists">Список вакансий</a></td>
       </tr>
       <tr>
         <td><i class="fa fa-calendar icon" aria-hidden="true"></i></td>
-        <td class="text"><a href="#">Мероприятия</a></td>
+        <td class="text"><a href="/events">Мероприятия</a></td>
       </tr>
       <tr>
         <td><i class="fa fa-shopping-cart icon" aria-hidden="true"></i></td>
-        <td class="text"><a href="#">Магазин</a></td>
+        <td class="text"><a href="/shop">Магазин</a></td>
       </tr>
       <tr>
         <td><i class="fa fa-book icon" aria-hidden="true"></i></td>
-        <td class="text"><a href="#">Образовка</a></td>
+        <td class="text"><a href="/education">Образовка</a></td>
       </tr>
       <tr>
         <td><i class="fa fa-cog icon" aria-hidden="true"></i></td>
@@ -63,11 +72,52 @@
     	</table>
   	</div>
 	</div>
-	{% block content %}
-	{% endblock %}
+
+  <div id="content">
+	   {% block content %}
+	   {% endblock %}
+  </div>
+    {% block dscript %}{% endblock %}
   <script>
+
+    window.addEventListener('DOMContentLoaded', function() {
+        setTimeout(function() {
+            var container = document.getElementById('content');
+            container.style.opacity = 1;
+        }, 500);
+    });
+    {% block script %}
+    {% endblock %}
+    function toggleReadonly() {
+        var inputElement = document.querySelector('input');
+        document.getElementById('data').classList.toggle('edit');
+        document.getElementById('ed').classList.toggle('edit');
+
+        if (inputElement.readOnly) {
+            inputElement.readOnly = false;
+            document.getElementById("iz").innerHTML = "Отменить";
+            document.getElementById('sub').style.opacity = 1;
+        } else {
+            inputElement.readOnly = true;
+            document.getElementById("iz").innerHTML = "Изменить";
+            document.getElementById('sub').style.opacity = 0;
+
+        }
+    }
     function show() {
-      document.getElementById('sidebar').classList.toggle('active');
+        var sidebar = document.getElementById('sidebar');
+        var content = document.getElementById('content');
+        var buttonIcon = document.querySelector('#but i');
+
+        sidebar.classList.toggle('active');
+        content.classList.toggle('shrink');
+        if (buttonIcon.classList.contains('fa-bars')) {
+            buttonIcon.classList.remove('fa-bars');
+            buttonIcon.classList.add('fa-times');
+        } else {
+            buttonIcon.classList.remove('fa-times');
+            buttonIcon.classList.add('fa-bars');
+        }
     }
   </script>
 </body>

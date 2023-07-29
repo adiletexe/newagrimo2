@@ -1,25 +1,12 @@
+{% extends 'main/layout.html' %}
 {% load static %}
 
-<html>
-<head>
-	<link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300&display=swap" rel="stylesheet">
-	<link href="https://fonts.googleapis.com/css2?family=Inter:wght@600&display=swap" rel="stylesheet">
+{% block style %}
 	<link rel="stylesheet" href="{% static 'css/home-d.css' %}">
-	<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
-</head>
-<body>
-	<div class="navbar">
-			<ul class="navbar-l">
-				<li class="navbar-i">AGRIMO
-				</li>
-				<li class="navbar-i" id="but"><button onclick ="show()"></button>
-				</li>
-				<li class="navbar-i" style="float: right;">Помощь
-				</li>
-				<li class="navbar-i" style="float: right;">Профиль
-				</li>
-			</ul>
-		</div>
+	<title>Домашняя</title>
+{% endblock %}
+
+{% block content %}
 	<div class="wrapper">
 		
 		<header>
@@ -31,64 +18,81 @@
 			<img src="{% static 'images/bg.png' %}" class="background">
 		</header>
 		<section>
-			<h1 class="title-main"><b>Возможности Agrimo</b></h1>
-
-			<h1 class="title-main"><b>Наши преимущества</b></h1>
+			<h1 class="title-main"><b>Agri<span style="color: darkgreen;">Mo</span> это:</b></h1>
+			<div class="square">
+			<div class="center-tabl">
+			<table class="vozh">
+				<tr>
+					<td class = "firs">
+						<h1>1.</h1><p>Мультифункциональная метеостанция с системой мониторинга урожая</p>
+					</td>
+					<td class = "firs">
+						<img src="https://mavic.kz/wp-content/uploads/2019/11/df596d6ea0a171ff35b6d816ce6dd034.jpg" height="200px" width="200px">
+					</td>
+					<td class = "firs">
+						<h1>3.</h1><p>Платформа мониторинга урожая и вовлечения профессиональных специалистов</p>
+					</td>
+				</tr>
+				<tr>
+					<td>
+						<img src="https://simvolt.ua/content/images/16/1000x1000l80bl0/83221046293328.jpg" height="200px" width="200px">
+					</td>
+					<td>
+						<h1>2.</h1><p>Мультифункциональные дроны с системой быстрого анализа урожая</p>
+					</td>
+					<td>
+						<img src="https://cdn-icons-png.flaticon.com/512/3721/3721812.png" height="200px" width="300px">
+					</td>
+				</tr>
+			</table>
+			</div>
+			<hr>
+			<h1 class="title-main"><b>Возможности AgriMo</b></h1>
+			<div class="center-table">
+			<table id="poss">
+				<tr>
+					<td>
+						<img src="{% static 'images/pc.png' %}" height="200px" width="200px">
+					</td>
+					<td>
+						<img src="{% static 'images/sound.png' %}" height="200px" width="200px">
+					</td>
+					<td>
+						<img src="{% static 'images/thgh.png' %}" height="200px" width="200px">
+					</td>
+					<td>
+						<img src="{% static 'images/group.png' %}" height="200px" width="200px">
+					</td>
+				</tr>
+				<tr>
+					<td>
+						<h1>Мониторинг урожая</h1><p>Прогноз данных на основе искусственного интеллекта</p>
+					</td>
+					<td>
+						<h1>Обнаружение и отпугивание животных</h1><p>Использование звуковых сигналов в метеостанциях</p>
+					</td>
+					<td>
+						<h1>Обнаружение болезней и  у растений</h1>
+					</td>
+					<td>
+						<h1>Привлечение людей в сельхоз. сферу</h1><p>Коммуникация между фермерами и рабочими, Образовательный материал</p>
+					</td>
+				</tr>
+			</table>
+			</div>
+			</div>
 		</section>
 	</div>
-<div id="sidebar">
-  <div class="table-container">
-    <table>
-      <tr>
-        <td><i class="fa fa-home icon" aria-hidden="true"></i></td>
-        <td class="text"><a href="{% url 'index' %}">Главная</a></td>
-      </tr>
-      <tr>
-        <td><i class="fa fa-user icon" aria-hidden="true"></i></td>
-        <td class="text"><a href="{% url 'index' %}">Личный кабинет</a></td>
-      </tr>
-      <tr>
-        <td><i class="fa fa-area-chart icon" aria-hidden="true"></i></td>
-        <td class="text"><a href="{% url 'graphs' param='week' %}">Мониторинг урожая</a></td>
-      </tr>
-      <tr>
-        <td><i class="fa fa-area-chart icon" aria-hidden="true"></i></td>
-        <td class="text"><a href="{% url 'graphspredict' param='week' %}">Пронозы ИИ</a></td>
-      </tr>
-      <tr>
-        <td><i class="fa fa-map-marker icon" aria-hidden="true"></i></td>
-        <td class="text"><a href="#">Геолокация</a></td>
-      </tr>
-      <tr>
-        <td><i class="fa fa-briefcase icon" aria-hidden="true"></i></td>
-        <td class="text"><a href="{% url 'specialists' %}">Список вакансий</a></td>
-      </tr>
-      <tr>
-        <td><i class="fa fa-calendar icon" aria-hidden="true"></i></td>
-        <td class="text"><a href="#">Мероприятия</a></td>
-      </tr>
-      <tr>
-        <td><i class="fa fa-shopping-cart icon" aria-hidden="true"></i></td>
-        <td class="text"><a href="{% url 'shop' %}">Магазин</a></td>
-      </tr>
-      <tr>
-        <td><i class="fa fa-book icon" aria-hidden="true"></i></td>
-        <td class="text"><a href="{% url 'education' %}">Образовка</a></td>
-      </tr>
-      <tr>
-        <td><i class="fa fa-cog icon" aria-hidden="true"></i></td>
-        <td class="text"><a href="#">Настройки</a></td>
-      </tr>
-    	</table>
-  </div>
-</div>
+{% endblock %}
 
+{% block script %}
+    const observer = new IntersectionObserver(entries => {
+        entries.forEach(entry => {
+            if (entry.isIntersecting) {
+                entry.target.classList.add('square-animation');
+            }
+        });
+    });
 
-	<script>
-      function show() {
-        document.getElementById('sidebar').classList.toggle('active');
-      }
-    </script>
-</body>
-</html>
-
+    observer.observe(document.querySelector('.square'));
+{% endblock %}

@@ -8,7 +8,7 @@
 	<link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@500&display=swap" rel="stylesheet">
 	<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
 </head>
-<body style="background-image: url('{% static 'images/bg.png' %}'); background-size: cover; position: relative;">
+<body>
 	<header>
 		AGRIMO
 	</header>
@@ -46,6 +46,10 @@
   					<datalist id="jobs">
     					<option value="Владелец Фермы">
     					<option value="Агроном - учетник">
+						<option value="Овощевод">
+						<option value="Агрохимик">
+						<option value="Защита растений">
+						<option value="Агроном - учетник">
   					</datalist>
 				</div>
 				<div class="form" id="email">
@@ -64,16 +68,16 @@
       					Пароль
     				</span>
   					</label>
-  					<button class="show" type="button" onclick="myFunction()"><i class="fa fa-eye" aria-hidden="true"></i></button>
+
 				</div>
 				<div class="form" id="password">
- 					<input id="hid" type="password" name="password2" autocomplete="off" required />
+ 					<input id="hide" type="password" name="password2" autocomplete="off" required />
   					<label for="text" class="label-name">
     				<span class="content-name">
       					Повторите пароль
     				</span>
   					</label>
-  					<button class="show" type="submit" onclick="myFunction()"><i class="fa fa-eye" aria-hidden="true"></i></button>
+  					<button class="show" type="button" onclick="myFunction()"><i class="fa fa-eye" aria-hidden="true"></i></button>
 				</div>
 				<p>Есть Аккаунт? <a href="{% url 'loginsystem' %}">Войдите</a></p>
 				<button class="button" type="submit">
@@ -84,5 +88,21 @@
 			
 		</div>
 	</div>
+	<script>
+		function myFunction() {
+  			var x = document.getElementById("hid");
+  			if (x.type === "password") {
+    			x.type = "text";
+    			document.getElementById("hide").type = "text";
+    			document.querySelector('i').classList.remove('fa-eye');
+            	document.querySelector('i').classList.add('fa-eye-slash');
+  			} else {
+    			x.type = "password";
+    			document.getElementById("hide").type = "password";
+    			document.querySelector('i').classList.remove('fa-eye-slash');
+            	document.querySelector('i').classList.add('fa-eye');
+  			}
+		}
+	</script>
 </body>
 </html>

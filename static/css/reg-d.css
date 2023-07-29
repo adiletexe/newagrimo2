@@ -1,6 +1,6 @@
 .main {
   margin: 0;
-  height:80%;
+  height:90%;
   width: 50%;
   position: absolute;
   top: 50%;
@@ -20,7 +20,7 @@ header{
 }
 
 body {
-  background-image: url('bg.png');
+  background-image: url('https://ssm22.ru/wp-content/uploads/2017/05/tarwe_oogst-1024x669.jpg');
   background-size: cover;
   position: relative;
 }

@@ -1,0 +1,302 @@
+#content{
+    font-family: 'Inter', sans-serif;
+    height: 100%;
+    width: 100%;
+}
+
+#ava{
+    position: absolute;
+    height: 200px;
+    width: 200px;
+    top: 15%;
+    left: 5%;
+}
+
+#description{
+    position: absolute;
+    bottom: 0;
+    width: 100%;
+    height: 50%;
+    background-color: lightgray;
+}
+
+#prof{
+    position: absolute;
+    left: calc(5% + 300px);
+    top: 16%;
+    width: 70%;
+    height: 200px;
+    transition: .4s;
+}
+
+#prof h1{
+    font-size: 40px;
+}
+
+#prof p{
+    font-size: 20px;
+    color: gray;
+}
+
+#prof button{
+    border: none;
+    background-color: white;
+    font-size: 50px;
+    color: gray;
+    transition: .4s;
+    text-align: right;
+    position: relative;
+    height:60px;
+    width: 50px;
+}
+
+#edit{
+    position: absolute;
+    top: 10px;
+    right: 50px;
+    transition: .4s;
+}
+
+#prof button:hover{
+    color: white;
+    width: 250px;
+    background-color: lightgray;
+    border-radius: 10px;
+    border: solid 4px darkgray;
+}
+
+#prof span{
+    position: absolute;
+    opacity: 0;
+    left: 5px;
+    font-size: 30px;
+    margin:5px;
+    color: white;
+    transition:.1s;
+    font-family: 'Inter', sans-serif;
+}
+
+#prof button:hover span{
+    opacity: 1;
+}
+
+#contdes{
+    margin-left: 5%;
+    margin-top: 30px;
+}
+
+#data p{
+    margin-bottom: 7px;
+}
+
+#description h1{
+    width: 300px;
+}
+
+#email{
+    width: 90%;
+    height: 40px;
+    border: none;
+    border: solid 3px gray;
+    border-radius: 20px;
+    padding-left: 20px;
+    background-color: lightgray;
+    font-family: 'Inter', sans-serif;
+    color: darkgray;
+    transition: .4s;
+}
+
+#city{
+    width: 100%;
+    height: 40px;
+    border: none;
+    border: solid 3px gray;
+    border-radius: 20px;
+    padding-left: 20px;
+    background-color: lightgray;
+    font-family: 'Inter', sans-serif;
+    color: darkgray;
+    transition: .4s;
+}
+
+#reg{
+    width: 100%;
+    height: 40px;
+    border: none;
+    border: solid 3px gray;
+    border-radius: 20px;
+    padding-left: 20px;
+    background-color: lightgray;
+    font-family: 'Inter', sans-serif;
+    color: darkgray;
+    transition: .4s;
+}
+
+#re{
+    float: left;
+    width: 42%;
+    margin-left: 6%;
+}
+
+#ci{
+    float: left;
+    width: 42%;
+}
+
+#farm{
+    width: 90%;
+    height: 40px;
+    border: none;
+    border: solid 3px gray;
+    border-radius: 20px;
+    padding-left: 20px;
+    background-color: lightgray;
+    font-family: 'Inter', sans-serif;
+    color: darkgray;
+    transition: .4s;
+}
+
+#fer{
+    float: left;
+    width: 100%;
+}
+
+#data.edit input{
+    background-color: white;
+    color: black;
+}
+
+#sub{
+    border: none;
+    border-radius: 20px;
+}
+
+@keyframes inc{
+    from{height: 60px;}
+    to{height: 120px;}
+}
+
+#id span{
+    opacity: 1;
+}
+
+#ed.edit{
+    animation: inc;
+    height: 120px;
+    background-color: lightgray;
+    border-radius: 10px;
+    border: solid 4px darkgray;
+    width: 250px;
+}
+
+#ed.edit #iz{
+    opacity: 1;
+}
+
+#sub{
+    opacity: 0;
+    border: 0;
+    border-radius: 10px;
+    width: 90%;
+    height: 30px;
+    margin-top: 10px;
+    font-family: 'Inter', sans-serif;
+    background-color: #FED65C;
+    .transition: .4s;
+}
+
+#content.shrink {
+    margin-right: 300px;
+}
+
+@media (max-width:480px){
+    #ava{
+    position: absolute;
+    height: 100px;
+    width: 100px;
+    top: 12%;
+    left: 5%;
+}
+
+#description{
+    position: absolute;
+    bottom: 0;0
+    width: 100%;
+    height: 65%;
+    background-color: lightgray;
+}
+#prof{
+    position: absolute;
+    left: calc(5% + 300px);
+    top: 12%;
+    left: 130px;
+    height: 100px;
+    transition: .4s;
+    width: 180px;
+}
+
+#prof h1{
+    font-size: 20px;
+}
+
+#prof p{
+    font-size: 10px;
+    color: gray;
+}
+
+#prof button{
+    border: none;
+    background-color: white;
+    font-size: 10px;
+    color: gray;
+    transition: .4s;
+    text-align: right;
+    position: relative;
+    height:20px;
+    width: 30px;
+}
+
+#edit{
+    position: absolute;
+    top: 90px;
+    right: 50px;
+    transition: .4s;
+}
+
+#prof button:hover{
+    color: white;
+    width: 30px;
+    background-color: lightgray;
+    border-radius: 10px;
+    border: solid 4px darkgray;
+}
+
+#prof span{
+    position: absolute;
+    opacity: 0;
+    left: 5px;
+    font-size: 20px;
+    margin:5px;
+    color: white;
+    transition:.1s;
+    font-family: 'Inter', sans-serif;
+}
+#ed.edit{
+    animation: none;
+    background-color: lightgray;
+    border-radius: 10px;
+    border: solid 4px darkgray;
+    height: 30px;
+}
+
+#iz{opacity: 0 !important;
+}
+
+#edit span{
+    font-size: 1px;
+}
+
+#ed.edit #iz{
+    opacity: 0;
+}
+}
