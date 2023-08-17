@@ -141,4 +141,4 @@ MEDIA_ROOT = BASE_DIR / 'static/main/images'
 
 DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
 
-CSRF_ALLOW_ALL_ORIGINS = True
+CSRF_TRUSTED_ORIGINS = ['https://agrimo.up.railway.app']
