@@ -185,7 +185,7 @@ def index(request):
     return render(request, 'main/index.html', context)
 
 
-@login_required()
+@login_required(login_url='loginsystem')
 def graphs(request, param):
     sunradiation_values = Sunradiation.objects.filter(user=request.user, **{f"{param}per__isnull": False}).order_by(f"{param}").values_list(
         f'{param}per', flat=True)
@@ -237,7 +237,7 @@ def graphs(request, param):
     return render(request, 'main/graphs.html', context)
 
 
-@login_required()
+@login_required(login_url='loginsystem')
 def graphspredict(request, param):
     sunradiation_values = Sunradiation.objects.filter(user=request.user, **{f"{param}per__isnull": False}).order_by(f"{param}").values_list(
         f'{param}per', flat=True)
@@ -304,15 +304,17 @@ def graphspredict(request, param):
 
     return render(request, 'main/graphspredict.html', context)
 
-
+@login_required(login_url='loginsystem')
 def graphsai(request):
     context = {}
     return render(request, 'main/graphsai.html', context)
 
+@login_required(login_url='loginsystem')
 def profile(request):
     context = {}
     return render(request, 'main/profile.html', context)
 
+@login_required(login_url='loginsystem')
 def add_shape(request):
     if request.method == "POST":
         userprofile = UserProfile.objects.get(user=request.user)
@@ -323,6 +325,7 @@ def add_shape(request):
             userprofile.shapes.add(shape_obj)
         return redirect('geolocation')
 
+@login_required(login_url='loginsystem')
 def geolocation(request):
     userprofile = UserProfile.objects.get(user=request.user)
     if request.method == "POST":
@@ -346,11 +349,13 @@ def geolocation(request):
     return render(request, 'main/geolocation.html', context)
 
 
+@login_required(login_url='loginsystem')
 def shop(request):
     goods = Shop.objects.all()
     context = {'goods':goods}
     return render(request, 'main/shop.html', context)
 
+@login_required(login_url='loginsystem')
 def specialists(request):
     experience = request.GET.getlist('experience')
     city = request.GET.getlist('city')
@@ -383,19 +388,23 @@ def specialists(request):
     context = {'specialists': filtered_specialists}
     return render(request, 'main/specialists.html', context)
 
+@login_required(login_url='loginsystem')
 def education(request):
     context = {}
     return render(request, 'main/education.html', context)
 
+@login_required(login_url='loginsystem')
 def events(request):
     context = {}
     return render(request, 'main/events.html', context)
 
+@login_required(login_url='loginsystem')
 def profileo(request):
     userprofile = UserProfile.objects.get(user = request.user)
     context = {'userprofile' : userprofile}
     return render(request, 'main/profile-owner.html', context)
 
+@login_required(login_url='loginsystem')
 def change(request):
     if request.method == "POST":
         userprofile = UserProfile.objects.get(user=request.user)
@@ -742,7 +751,7 @@ def signupsystem(request):
             except IntegrityError:
                 return render(request, 'main/signupsystem.html', {'form': UserCreationForm, 'error': 'Username is already taken!'})
 
-@login_required
+@login_required(login_url='loginsystem')
 def logoutsystem(request):
     if request.method == "GET":
         logout(request)
