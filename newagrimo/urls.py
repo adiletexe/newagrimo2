@@ -25,5 +25,4 @@ urlpatterns = [
     path('profile', views.profile, name='profile'),
     path('education', views.education, name='education'),
     path('add_shape', views.add_shape, name='add_shape'),
-    path('analysis/', views.ChatbotView.as_view()),
 ]  + static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)
