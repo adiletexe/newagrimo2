@@ -36,7 +36,7 @@ from langchain.memory import ConversationBufferMemory
 os.environ['OPENAI_API_KEY'] = "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"
 
 # location of the pdf file/files.
-doc_reader = PdfReader('content/agrimostrain.pdf')
+doc_reader = PdfReader('content/pdfagrimostrain.pdf')
 
 # read data from the file and put them into a variable called raw_text
 raw_text = ''
