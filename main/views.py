@@ -25,6 +25,50 @@ from rest_framework.response import Response
 from rest_framework import status
 import os
 
+@api_view(['POST'])
+def update_graphsmin(request):
+    if request.method == "POST":
+        try:
+            data = request.data
+
+            for item in data:
+                username = item['username']
+                sensor = item['sensor']
+                targetmin = item['targetmin']
+                targetminper = item['targetminper']
+                user1 = User.objects.get(username=username)
+                print(item)
+                if sensor == "Sunradiation":
+                    matching_model = Sunradiation.objects.filter(user_id=user1.id, min=targetmin).first()
+                elif sensor == "Humidity":
+                    matching_model = Humidity.objects.filter(user_id=user1.id, min=targetmin).first()
+                elif sensor == "Odor":
+                    matching_model = Odor.objects.filter(user_id=user1.id, min=targetmin).first()
+                elif sensor == "Raindrop":
+                    matching_model = Raindrop.objects.filter(user_id=user1.id, min=targetmin).first()
+                elif sensor == "Temperature":
+                    matching_model = Temperature.objects.filter(user_id=user1.id, min=targetmin).first()
+                elif sensor == "Light":
+                    matching_model = Light.objects.filter(user_id=user1.id, min=targetmin).first()
+                elif sensor == "Moisture":
+                    matching_model = Moisture.objects.filter(user_id=user1.id, min=targetmin).first()
+                elif sensor == "Pressure":
+                    matching_model = Pressure.objects.filter(user_id=user1.id, min=targetmin).first()
+
+                if matching_model:
+                    matching_model.minper = targetminper
+                    matching_model.save()
+                    print("Model is saved")
+            return Response({'message': 'Data successfully processed'})
+
+        except json.JSONDecodeError as e:
+            return Response({'error': 'Invalid JSON format'}, status=400)
+
+        except Exception as e:
+            return Response({'error': str(e)}, status=500)
+
+    return Response({'error': 'Method not allowed'}, status=405)
+
 def get_coordinates(address):
     geolocator = Nominatim(user_agent="my_geocoder")
     location = geolocator.geocode(address)
