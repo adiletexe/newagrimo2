@@ -93,6 +93,33 @@ class Pressure(models.Model):
     year = models.IntegerField(null=True, blank=True)
     yearper = models.IntegerField(null=True, blank=True)
 
+class Statistics(models.Model):
+    name = models.IntegerField(default=0)
+    value = models.IntegerField(default=0)
+
+class Info(models.Model):
+    number = models.ForeignKey(Statistics, on_delete=models.CASCADE)
+    information = models.TextField()
+
+class Table(models.Model):
+    farmname = models.CharField(max_length=200)
+    location = models.CharField(max_length=200)
+    typeofcrop = models.CharField(max_length=200)
+    startdate = models.CharField(max_length=200)
+    enddate = models.CharField(max_length=200)
+    yieldtons = models.CharField(max_length=200)
+    totalarea = models.CharField(max_length=200)
+    totalproduction = models.CharField(max_length=200)
+    totalcrops = models.CharField(max_length=200)
+    soilcondition = models.CharField(max_length=200)
+    disease = models.CharField(max_length=200)
+    diseasepercentage = models.CharField(max_length=200)
+    yieldpercentage = models.CharField(max_length=200)
+    waterlevel = models.CharField(max_length=200)
+    income = models.CharField(max_length=200)
+    expenses = models.CharField(max_length=200)
+    farmprofit = models.CharField(max_length=200)
+
 class Sunradiation(models.Model):
     user = models.ForeignKey(User, on_delete=models.CASCADE, null=True, blank=True)
     min = models.IntegerField(null=True, blank=True)
