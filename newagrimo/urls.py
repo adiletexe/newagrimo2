@@ -26,4 +26,5 @@ urlpatterns = [
     path('education', views.education, name='education'),
     path('add_shape', views.add_shape, name='add_shape'),
     path('update_graphsmin', views.update_graphsmin, name='update_graphsmin'),
+    path('stats', views.stats, name='stats'),
 ]  + static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)
