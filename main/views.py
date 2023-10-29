@@ -4,7 +4,8 @@ from django.contrib.auth.models import User
 from django.contrib.auth import login, logout, authenticate
 from django.contrib.auth.decorators import login_required
 from django.db import IntegrityError
-from .models import Shapes, UserProfile, Sunradiation, Odor, Humidity, Raindrop, Temperature, Light, Moisture, Pressure, Shop, Specialists, Review
+from .models import Shapes, UserProfile, Sunradiation, Odor, Humidity, Raindrop, Temperature, Light, Moisture, Pressure, Shop, Specialists, Review, Table, Info, Statistics
+
 from django.shortcuts import render
 from django.conf import settings
 import requests
@@ -85,6 +86,75 @@ def get_coordinates(address):
     else:
         return None
 
+
+def stats(request):
+    tableinfo = Table.objects.all()
+    sec1 = Statistics.objects.filter(name=1)
+    s1 = sec1.first().value
+    sec2 = Statistics.objects.filter(name=2)
+    s2 = sec2.first().value
+    sec3 = Statistics.objects.filter(name=3)
+    s3 = sec3.first().value
+    sec4 = Statistics.objects.filter(name=4)
+    s4 = sec4.first().value
+    sec5 = Statistics.objects.filter(name=5)
+    s5 = sec5.first().value
+    sec6 = Statistics.objects.filter(name=6)
+    s6 = sec6.first().value
+    sec7 = Statistics.objects.filter(name=7)
+    s7 = sec7.first().value
+    sec8 = Statistics.objects.filter(name=8)
+    s8 = sec8.first().value
+    sec9 = Statistics.objects.filter(name=9)
+    s9 = sec9.first().value
+    sec10 = Statistics.objects.filter(name=10)
+    s10 = sec10.first().value
+    sec11 = Statistics.objects.filter(name=11)
+    s11 = sec11.first().value
+    sec12 = Statistics.objects.filter(name=12)
+    s12 = sec12.first().value
+
+    my_list = [s1, s2, s3, s4, s5, s6, s7, s8, s9, s10, s11, s12]
+    ss1 = ''
+    ss2 = ''
+    ss3 = ''
+    ss4 = ''
+    ss5 = ''
+    ss6 = ''
+    ss7 = ''
+    ss8 = ''
+    ss9 = ''
+    ss10 = ''
+    ss11 = ''
+    ss12 = ''
+
+    if int(s1) > 0:
+        ss1 = 'Tomato spider mites, also known as two-spotted spider mites, are small arachnids that can cause significant damage to tomato plants. They typically feed on the underside of leaves, sucking out the plants fluids and causing a speckled appearance on the leaves. Severe infestations can cause the leaves to turn yellow and fall off, which can reduce yields. Spider mites are more common in hot, dry weather and can reproduce rapidly, making management of this disease challenging.'
+    if int(s2) > 0:
+        ss2 = 'Tomato leaf mold is a fungal disease that thrives in high humidity environments. It typically appears as yellowing leaves with brown spots and a fuzzy growth on the underside of the leaves. Infected leaves may eventually fall off the plant, and severe infestations can reduce yields. This disease can be challenging to manage, but cultural practices such as adequate air circulation and moisture control can help prevent its spread.'
+    if int(s3) > 0:
+        ss3 = 'Tomato blight is a fungal disease that can cause significant damage to tomato plants. It typically appears as dark spots on the leaves and stems, which can eventually lead to the entire plant turning brown and withering away. This disease can be caused by various types of fungi, and management strategies may vary depending on the specific type. Cultural practices such as crop rotation and avoiding overhead watering can help prevent the spread of this disease.'
+    if int(s4) > 0:
+        ss4 = 'Strawberry powdery mildew is a fungal disease that can cause significant damage to strawberry plants. It typically appears as a white powdery coating on the leaves, stems, and flowers of the plant. As the disease progresses, the leaves may curl, turn yellow, and fall off. Severe infestations can reduce yields and affect the quality of the fruit. This disease is more common in humid conditions and can be managed through cultural practices such as pruning, removing infected plant material, and avoiding overhead watering.'
+    if int(s5) > 0:
+        ss5 = 'Beans angular leaf spot is a bacterial disease that can affect various types of beans, including snap beans, lima beans, and kidney beans. It typically appears as water-soaked lesions on the leaves, which can eventually turn brown and necrotic. The lesions often have a yellow halo around them, giving them a distinctive angular appearance. Severe infestations can cause defoliation, reduced yields, and reduced quality of the beans. This disease can be managed through cultural practices such as crop rotation, avoiding overhead watering, and using disease-free seeds.'
+    if int(s6) > 0:
+        ss6 = 'Beans rust is a fungal disease that can affect various types of beans, including snap beans, lima beans, and kidney beans. It typically appears as rusty brown spots on the leaves, which can eventually cause them to wither and fall off. The disease can also affect the pods, causing them to become discolored and deformed. Severe infestations can lead to significant yield losses. This disease is more common in humid conditions and can be managed through cultural practices such as crop rotation, avoiding overhead watering, and using disease-free seeds.'
+    if int(s7) > 0:
+        ss7 = 'Strawberry angular leaf spot is a bacterial disease that can cause significant damage to strawberry plants. It typically appears as water-soaked lesions on the leaves, which can eventually turn brown and necrotic. The lesions often have a distinctive angular appearance and can be accompanied by yellow halos. The disease can also affect the fruit, causing it to become discolored and deformed. This disease can be managed through cultural practices such as removing infected plant material and using disease-resistant varieties.'
+    if int(s8) > 0:
+        ss8 = 'Strawberry anthracnose fruit rot is a fungal disease that can cause significant damage to strawberry plants. It typically appears as small, water-soaked lesions on the fruit, which can eventually turn brown and sunken. The disease can also affect the leaves and stems of the plant, causing them to become discolored and necrotic. Severe infestations can lead to significant yield losses. This disease is more common in humid conditions and can be managed through cultural practices such as crop rotation, removing infected plant material, and using fungicides.'
+    if int(s9) > 0:
+        ss9 = 'Strawberry blossom blight is a fungal disease that can cause significant damage to strawberry plants. It typically affects the flowers of the plant, causing them to become discolored and necrotic. Infected flowers may fail to produce fruit or may produce small, deformed fruit. The disease can also affect the leaves and stems of the plant. This disease can be managed through cultural practices such as removing infected plant material, using fungicides, and improving air circulation to reduce humidity.'
+    if int(s10) > 0:
+        ss10 = 'Strawberry gray mold is a fungal disease that can cause significant damage to strawberry plants. It typically appears as grayish-brown fuzzy growth on the fruit, leaves, and flowers of the plant. Infected fruit may become soft and watery, while infected flowers may fail to produce fruit. The disease can spread rapidly in humid conditions and can cause significant yield losses. This disease can be managed through cultural practices such as removing infected plant material, using fungicides, and improving air circulation to reduce humidity.'
+    if int(s11) > 0:
+        ss11 = 'Strawberry leaf spot is a fungal disease that can cause significant damage to strawberry plants. It typically appears as small, dark spots on the leaves, which can eventually merge and cause the leaves to become necrotic. The disease can also affect the fruit and stems of the plant. Severe infestations can cause defoliation, reduced yields, and reduced quality of the fruit. This disease can be managed through cultural practices such as removing infected plant material, using fungicides, and improving air circulation to reduce humidity.'
+    if int(s12) > 0:
+        ss12 = 'Strawberry powdery mildew fruit is a fungal disease that can cause significant damage to strawberry plants. It typically appears as a white powdery coating on the fruit, which can eventually cause it to become discolored and deformed. The disease can also affect the leaves and stems of the plant. Severe infestations can cause significant yield losses. This disease is more common in dry conditions and can be managed through cultural practices such as pruning, removing infected plant material, and avoiding overhead watering.'
+
+
+    return render(request, 'main/stats.html', {'tableinfo': tableinfo, 's1':s1, 's2':s2, 's3':s3, 's4':s4, 's5':s5, 's6':s6, 's7':s7, 's8':s8, 's9':s9, 's10':s10, 's11':s11, 's12':s12, 'ss1':ss1, 'ss2':ss2, 'ss3':ss3, 'ss4':ss4, 'ss5':ss5, 'ss6':ss6, 'ss7':ss7, 'ss8':ss8, 'ss9':ss9, 'ss10':ss10, 'ss11':ss11, 'ss12':ss12})
 
 
 # class SensorDataRetriever:
