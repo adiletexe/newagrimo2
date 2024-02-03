@@ -14,14 +14,14 @@
 	</header>
 	<div class="main">
 		<div class="content">
-			<h1 class="reg-t">Авторизация</h1>
+			<h1 class="reg-t">Authorization</h1>
 			<form action="{% url 'loginsystem' %}" method="POST">
 				{% csrf_token %}
 				<div class="form" id="email">
  					<input type="text" name="username" autocomplete="off" required />
   					<label for="text" class="label-name">
     				<span class="content-name">
-      					Электронная почта
+      					Email
     				</span>
   					</label>
 				</div>
@@ -30,15 +30,15 @@
  					<input id="hid" type="password" name="password" autocomplete="off" required />
   					<label for="text" class="label-name">
     				<span class="content-name">
-      					Пароль
+      					Password
     				</span>
   					</label>
   					<button class="show" type="button" onclick="myFunction()"><i class="fa fa-eye" aria-hidden="true"></i></button>
 				</div>
-				<p>Нет аккаунта? <a href="{% url 'signupsystem' %}">Создайте</a></p><br>
-				<p>Забыли пароль? <a href="#">Восстановить</a></p>
+				<p>Don't have an account? <a href="{% url 'signupsystem' %}">Create one</a></p><br>
+				<p>Forgot your password? <a href="#">Recover</a></p>
 				<button class="button" type="submit">
-  					<p class="button-text">Продолжить</p>
+  					<p class="button-text">Continue</p>
   					<img class="button-icon" src="https://cdn-icons-png.flaticon.com/512/109/109617.png">
 				</button>
 			</form>	

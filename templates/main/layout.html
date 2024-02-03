@@ -20,9 +20,9 @@
 			</li>
 			<li class="navbar-i" id = "but"><button onclick ="show()"><i class="fa fa-bars" aria-hidden="true" style="color:white;"></i></button>
 			</li>
-			<li class="navbar-i" style="float: right;"><a href="#">Помощь</a>
+			<li class="navbar-i" style="float: right;"><a href="#">Help</a>
 			</li>
-			<li class="navbar-i" style="float: right;"><a href="#">Профиль</a>
+			<li class="navbar-i" style="float: right;"><a href="#">Profile</a>
 			</li>
 		</ul>
 	</div>
@@ -31,43 +31,43 @@
     	<table>
       <tr>
         <td><i class="fa fa-home icon" aria-hidden="true"></i></td>
-        <td class="text"><a href="{% url 'index' %}">Главная</a></td>
+        <td class="text"><a href="{% url 'index' %}">Home page</a></td>
       </tr>
       <tr>
         <td><i class="fa fa-user icon" aria-hidden="true"></i></td>
-        <td class="text"><a href="{% url 'profileo' %}">Личный кабинет</a></td>
+        <td class="text"><a href="{% url 'profileo' %}">Profile</a></td>
       </tr>
       <tr>
         <td><i class="fa fa-area-chart icon" aria-hidden="true"></i></td>
-        <td class="text"><a href="{% url 'graphsai' %}">Мониторинг урожая</a></td>
+        <td class="text"><a href="{% url 'graphsai' %}">Crop monitoring</a></td>
       </tr>
       <tr>
         <td><i class="fa fa-area-chart icon" aria-hidden="true"></i></td>
-        <td class="text"><a href="{% url 'graphsai' %}">Прогноз</a></td>
+        <td class="text"><a href="{% url 'graphsai' %}">Forecast</a></td>
       </tr>
       <tr>
         <td><i class="fa fa-map-marker icon" aria-hidden="true"></i></td>
-        <td class="text"><a href="{% url 'geolocation' %}">Геолокация</a></td>
+        <td class="text"><a href="{% url 'geolocation' %}">Geolocation</a></td>
       </tr>
       <tr>
         <td><i class="fa fa-briefcase icon" aria-hidden="true"></i></td>
-        <td class="text"><a href="{% url 'specialists' %}">Список вакансий</a></td>
+        <td class="text"><a href="{% url 'specialists' %}">Job vacancy</a></td>
       </tr>
       <tr>
         <td><i class="fa fa-calendar icon" aria-hidden="true"></i></td>
-        <td class="text"><a href="#">Мероприятия</a></td>
+        <td class="text"><a href="{% url 'events' %}">Events</a></td>
       </tr>
       <tr>
         <td><i class="fa fa-shopping-cart icon" aria-hidden="true"></i></td>
-        <td class="text"><a href="{% url 'shop' %}">Магазин</a></td>
+        <td class="text"><a href="{% url 'shop' %}">Shop</a></td>
       </tr>
       <tr>
         <td><i class="fa fa-book icon" aria-hidden="true"></i></td>
-        <td class="text"><a href="{% url 'education' %}">Образовка</a></td>
+        <td class="text"><a href="{% url 'education' %}">Education</a></td>
       </tr>
       <tr>
         <td><i class="fa fa-cog icon" aria-hidden="true"></i></td>
-        <td class="text"><a href="#">Настройки</a></td>
+        <td class="text"><a href="#">Settings</a></td>
       </tr>
     	</table>
   	</div>
@@ -95,11 +95,11 @@
 
         if (inputElement.readOnly) {
             inputElement.readOnly = false;
-            document.getElementById("iz").innerHTML = "Отменить";
+            document.getElementById("iz").innerHTML = "Cancel";
             document.getElementById('sub').style.opacity = 1;
         } else {
             inputElement.readOnly = true;
-            document.getElementById("iz").innerHTML = "Изменить";
+            document.getElementById("iz").innerHTML = "Edit";
             document.getElementById('sub').style.opacity = 0;
 
         }

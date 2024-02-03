@@ -14,14 +14,14 @@
 	</header>
 	<div class="main">
 		<div class="content">
-			<h1 class="reg-t">Регистрация</h1>
+			<h1 class="reg-t">Registration</h1>
 			<form action="{% url 'signupsystem' %}" method="POST">
 				{% csrf_token %}
 				<div class="form" id="name">
  					<input type="text" name="name" autocomplete="off" required />
   					<label for="text" class="label-name">
     				<span class="content-name">
-      					Имя
+      					Name
     				</span>
   					</label>
 				</div>
@@ -29,7 +29,7 @@
  					<input type="text" name="lastname" autocomplete="off" required />
   					<label for="text" class="label-name">
     				<span class="content-name">
-      					Фамилия
+      					Last Name
     				</span>
   					</label>
 				</div>
@@ -37,26 +37,26 @@
  					<input type="text" name="phone" autocomplete="off" required />
   					<label for="text" class="label-name">
     				<span class="content-name">
-      					Номер телефона
+      					Phone Number
     				</span>
   					</label>
 				</div>
 				<div class="form" id="job">
- 					<input list="jobs" name="profession" placeholder="Тип деятельности">
+ 					<input list="jobs" name="profession" placeholder="Occupation Type">
   					<datalist id="jobs">
-    					<option value="Владелец Фермы">
-    					<option value="Агроном - учетник">
-						<option value="Овощевод">
-						<option value="Агрохимик">
-						<option value="Защита растений">
-						<option value="Агроном - учетник">
+    					<option value="Farm Owner">
+    					<option value="Agronomist - Accountant">
+						<option value="Horticulturist">
+						<option value="Agrochemist">
+						<option value="Plant Protection">
+						<option value="Agronomist - Accountant">
   					</datalist>
 				</div>
 				<div class="form" id="email">
  					<input type="text" name="username" autocomplete="off" required />
   					<label for="text" class="label-name">
     				<span class="content-name">
-      					Электронная почта
+      					Email
     				</span>
   					</label>
 				</div>
@@ -65,7 +65,7 @@
  					<input id="hid" type="password" name="password1" autocomplete="off" required />
   					<label for="text" class="label-name">
     				<span class="content-name">
-      					Пароль
+      					Password
     				</span>
   					</label>
 
@@ -74,14 +74,14 @@
  					<input id="hide" type="password" name="password2" autocomplete="off" required />
   					<label for="text" class="label-name">
     				<span class="content-name">
-      					Повторите пароль
+      					Repeat Password
     				</span>
   					</label>
   					<button class="show" type="button" onclick="myFunction()"><i class="fa fa-eye" aria-hidden="true"></i></button>
 				</div>
-				<p>Есть Аккаунт? <a href="{% url 'loginsystem' %}">Войдите</a></p>
+				<p>Already have an account? <a href="{% url 'loginsystem' %}">Log in</a></p>
 				<button class="button" type="submit">
-  					<p class="button-text">Продолжить</p>
+  					<p class="button-text">Continue</p>
   					<img class="button-icon" src="https://cdn-icons-png.flaticon.com/512/109/109617.png">
 				</button>
 			</form>	

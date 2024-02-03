@@ -14,39 +14,39 @@
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/leaflet.draw/1.0.4/leaflet.draw.css" />
     <script src="https://cdnjs.cloudflare.com/ajax/libs/leaflet.draw/1.0.4/leaflet.draw.js"></script>
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Карта</title>
+    <title>Map</title>
 {% endblock %}
 {% block content %}
 	<div class="wrapper">
-        <h1>Локация вашей метеостанции</h1>
-        <form method="POST" action="{% url 'geolocation' %}">
+        <h1>Your Weather Station Location</h1>
+        <form method="POST" action="{% url 'geolocation' %}" id="latlon">
             {% csrf_token %}
             <input type="text" name="lat"> Latitude
             <br>
             <input type="text" name="long"> Longitude
             <br>
-            <input type="submit">Сохранить</input>
+            <button type="submit">Save</button>
         </form>
         <div id="map"></div>
         <form method="POST" action="{% url 'add_shape' %}">
         {% csrf_token %}
         <input type="hidden" name="drawn_shapes[]" id="drawn-shapes-input">
-        <button type="submit"><p>Сохранить Черчения</p><i class="fa fa-check" aria-hidden="true"></i></button>
+        <button type="submit"><p>Save Drawings</p><i class="fa fa-check" aria-hidden="true"></i></button>
         </form>
 
         <br>
 	</div>
     <form method="POST" action="{% url 'startif' %}">
         {% csrf_token %}
-            <button class= "mete" type="submit"><p>Запустить метеостанцию</p></button>
+            <button class= "mete" type="submit"><p>Start Weather Station</p></button>
         </form>
     <br>
     <form method="POST" action="{% url 'endif' %}">
         {% csrf_token %}
-            <button class= "mete" type="submit" style="left: 1100px; width: 200px;"><p>Остановить метеостанцию</p></button>
+            <button class= "mete" type="submit" style="left: 1100px; width: 200px;"><p>Stop Weather Station</p></button>
     </form>
 {% endblock %}
-    {% block dscript %}<script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyBUw2Y59tuLTbBjptXWD0cQTgmZ8JLqoXw"></script>{% endblock %}
+    {% block dscript %}<script src="https://maps.googleapis.com/maps/api/js?key=YOUR_GOOGLE_MAPS_API_KEY"></script>{% endblock %}
 {% block script %}
         const key = 'iCRDXEEMTLDhCmkDfPu5';
 
@@ -112,4 +112,3 @@
             geojsonLayer.bindPopup(hideButton);
         });
 {% endblock %}
-

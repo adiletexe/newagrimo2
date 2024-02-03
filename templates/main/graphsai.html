@@ -9,185 +9,187 @@
     <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
     <link rel="icon" type="image/x-icon" href="{% static 'images/icon.png' %}">
     <meta content="width=device-width, initial-scale=1" name="viewport" />
-    <title>Прогноз</title>
+    <title>Forecast</title>
 </head>
 <body>
 	<div class="navbar">
 		<ul class="navbar-l">
 			<li class="navbar-i">AGRIMO
 			</li>
-			<li class="navbar-i" id = "but"><button onclick ="show()"><i class="fa fa-bars" aria-hidden="true" style="color:white;"></i></button>
+			<li class="navbar-i" id="but"><button onclick="show()"><i class="fa fa-bars" aria-hidden="true" style="color:white;"></i></button>
 			</li>
-			<li class="navbar-i" style="float: right;"><a href="#">Помощь</a>
+			<li class="navbar-i" style="float: right;"><a href="#">Help</a>
 			</li>
-			<li class="navbar-i" style="float: right;"><a href="#">Профиль</a>
+			<li class="navbar-i" style="float: right;"><a href="#">Profile</a>
 			</li>
 		</ul>
 	</div>
 	<div id="sidebar">
-  	<div class="table-container">
-    	<table>
-      <tr>
-        <td><i class="fa fa-home icon" aria-hidden="true"></i></td>
-        <td class="text"><a href="{% url 'index' %}">Главная</a></td>
-      </tr>
-      <tr>
-        <td><i class="fa fa-user icon" aria-hidden="true"></i></td>
-        <td class="text"><a href="{% url 'index' %}">Личный кабинет</a></td>
-      </tr>
-      <tr>
-        <td><i class="fa fa-area-chart icon" aria-hidden="true"></i></td>
-        <td class="text"><a href="{% url 'graphsai' %}">Мониторинг урожая</a></td>
-      </tr>
-      <tr>
-        <td><i class="fa fa-area-chart icon" aria-hidden="true"></i></td>
-        <td class="text"><a href="{% url 'graphsai' %}">Пронозы ИИ</a></td>
-      </tr>
-      <tr>
-        <td><i class="fa fa-map-marker icon" aria-hidden="true"></i></td>
-        <td class="text"><a href="{% url 'geolocation' %}">Геолокация</a></td>
-      </tr>
-      <tr>
-        <td><i class="fa fa-briefcase icon" aria-hidden="true"></i></td>
-        <td class="text"><a href="{% url 'specialists' %}">Список вакансий</a></td>
-      </tr>
-      <tr>
-        <td><i class="fa fa-calendar icon" aria-hidden="true"></i></td>
-        <td class="text"><a href="#">Мероприятия</a></td>
-      </tr>
-      <tr>
-        <td><i class="fa fa-shopping-cart icon" aria-hidden="true"></i></td>
-        <td class="text"><a href="{% url 'shop' %}">Магазин</a></td>
-      </tr>
-      <tr>
-        <td><i class="fa fa-book icon" aria-hidden="true"></i></td>
-        <td class="text"><a href="{% url 'education' %}">Образовка</a></td>
-      </tr>
-      <tr>
-        <td><i class="fa fa-cog icon" aria-hidden="true"></i></td>
-        <td class="text"><a href="#">Настройки</a></td>
-      </tr>
-    	</table>
-  	</div>
+  		<div class="table-container">
+    		<table>
+      			<tr>
+        			<td><i class="fa fa-home icon" aria-hidden="true"></i></td>
+        			<td class="text"><a href="{% url 'index' %}">Home page</a></td>
+      			</tr>
+      			<tr>
+        			<td><i class="fa fa-user icon" aria-hidden="true"></i></td>
+        			<td class="text"><a href="{% url 'index' %}">Profile</a></td>
+      			</tr>
+      			<tr>
+        			<td><i class="fa fa-area-chart icon" aria-hidden="true"></i></td>
+        			<td class="text"><a href="{% url 'graphsai' %}">Crop monitoring</a></td>
+      			</tr>
+      			<tr>
+        			<td><i class="fa fa-area-chart icon" aria-hidden="true"></i></td>
+        			<td class="text"><a href="{% url 'graphsai' %}">AI forecast</a></td>
+      			</tr>
+      			<tr>
+        			<td><i class="fa fa-map-marker icon" aria-hidden="true"></i></td>
+        			<td class="text"><a href="{% url 'geolocation' %}">Geolocation</a></td>
+      			</tr>
+      			<tr>
+        			<td><i class="fa fa-briefcase icon" aria-hidden="true"></i></td>
+        			<td class="text"><a href="{% url 'specialists' %}">Job vacancy</a></td>
+      			</tr>
+      			<tr>
+        			<td><i class="fa fa-calendar icon" aria-hidden="true"></i></td>
+        			<td class="text"><a href="{% url 'events' %}">Events</a></td>
+      			</tr>
+      			<tr>
+        			<td><i class="fa fa-shopping-cart icon" aria-hidden="true"></i></td>
+        			<td class="text"><a href="{% url 'shop' %}">Shop</a></td>
+      			</tr>
+      			<tr>
+        			<td><i class="fa fa-book icon" aria-hidden="true"></i></td>
+        			<td class="text"><a href="{% url 'education' %}">Education</a></td>
+      			</tr>
+      			<tr>
+        			<td><i class="fa fa-cog icon" aria-hidden="true"></i></td>
+        			<td class="text"><a href="#">Settings</a></td>
+      			</tr>
+    		</table>
+  		</div>
 	</div>
-    <div id="step"></div>
+	<div id="step"></div>
 
-  <div id="main">
-    <div class="annow">
-      <h1>Скорее всего у вас заражение урожая!</h1>
-    </div>
-    <div class="annow">
-      <h1>Ожидается Засуха!</h1>
-    </div>
-    <h1 id="title-f">Мониторинг урожая</h1>
-    <div id="switcher">
-      <ul>
-        <li>Промежуток:</li>
-        <li><form action="{% url 'graphs' param='min' %}"><button type="submit">Минута</button></form></li>
-        <li><form action="{% url 'graphs' param='day' %}"><button type="submit">День</button></form></li>
-        <li><form action="{% url 'graphs' param='week' %}"><button type="submit">Неделя</button></form></li>
-        <li><form action="{% url 'graphs' param='month' %}"><button type="submit">Месяц</button></form></li>
-        <li><form action="{% url 'graphs' param='year' %}"><button type="submit">Год</button></form></li>
-      </ul>
-    </div>
-    <div class="small-stat">
-      <div class="desc-stat">
-        <div class="title-stat">
-          <p>Статистика</p>
-          <h5>Температура</h5>
-        </div>
-        <select id="time" name="time" form="time">
-          <option value="month">Месяц</option>
-          <option value="week">Неделя</option>
-          <option value="year">Год</option>
-          <option value="day">День</option>
-        </select>
-        <hr>
-      </div>
-        <canvas id="myLineChart1" width="700" height="480"></canvas>
-    </div>
-    <div class="small-stat">
-      <div class="desc-stat">
-        <div class="title-stat">
-          <p>Статистика</p>
-          <h5>Воспламенение</h5>
-        </div>
-        <select id="time" name="time" form="time">
-          <option value="month">Месяц</option>
-          <option value="week">Неделя</option>
-          <option value="year">Год</option>
-          <option value="day">День</option>
-        </select>
-        <hr>
-      </div>
-      <canvas id="myLineChart2" width="700px" height="480px"></canvas>
-    </div>
-    <div class="long-stat">
-      <div class="desc-stat-l">
-        <div class="title-stat-l">
-          <p>Статистика</p>
-          <h5>Влажность(%)</h5>
-        </div>
-        <select id="time" name="time" form="time">
-          <option value="month">Месяц</option>
-          <option value="week">Неделя</option>
-          <option value="year">Год</option>
-          <option value="day">День</option>
-        </select>
-        <hr>
-      </div>
-      <canvas id="myLineChart" width="1650" height="470"></canvas>
-    </div>
-    <div class="small-stat">
-      <div class="desc-stat">
-        <div class="title-stat">
-          <p>Статистика</p>
-          <h5>Атмосферное давление (hPa)</h5>
-        </div>
-        <select id="time" name="time" form="time">
-          <option value="month">Месяц</option>
-          <option value="week">Неделя</option>
-          <option value="year">Год</option>
-          <option value="day">День</option>
-        </select>
-        <hr>
-      </div>3
-      <canvas id="myBarChart" width="700" height="480"></canvas>
-    </div>
-    <div class="small-stat">
-      <div class="desc-stat">
-        <div class="title-stat">
-          <p>Статистика</p>
-          <h5>Уровень Запаха</h5>
-        </div>
-        <select id="time" name="time" form="time">
-          <option value="month">Месяц</option>
-          <option value="week">Неделя</option>
-          <option value="year">Год</option>
-          <option value="day">День</option>
-        </select>
-        <hr>
-      </div>
-       <canvas id="myBarChart1" width="700" height="480"></canvas>
-    </div>
-    <div class="long-stat">
-      <div class="desc-stat-l">
-        <div class="title-stat-l">
-          <p>Статистика</p>
-          <h5>Солнечная радиация</h5>
-        </div>
-        <select id="time" name="time" form="time">
-          <option value="month">Месяц</option>
-          <option value="week">Неделя</option>
-          <option value="year">Год</option>
-          <option value="day">День</option>
-        </select>
-        <hr>
-      </div>
-       <canvas id="myLineChart3" width="1650" height="470"></canvas>
-    </div>
-  </div>
-  <script>
+	<div id="main">
+    	<div class="annow">
+      		<h1>Most likely you have a crop infection!</h1>
+    	</div>
+    	<div class="annow">
+      		<h1>Drought expected!</h1>
+    	</div>
+    	<h1 id="title-f">Crop monitoring</h1>
+    	<div id="switcher">
+      		<ul>
+        		<li>Interval:</li>
+        		<li><form action="{% url 'graphs' param='min' %}"><button type="submit">Minute</button></form></li>
+        		<li><form action="{% url 'graphs' param='day' %}"><button type="submit">Day</button></form></li>
+        		<li><form action="{% url 'graphs' param='week' %}"><button type="submit">Week</button></form></li>
+        		<li><form action="{% url 'graphs' param='month' %}"><button type="submit">Month</button></form></li>
+        		<li><form action="{% url 'graphs' param='year' %}"><button type="submit">Year</button></form></li>
+      		</ul>
+    	</div>
+
+    	<div class="small-stat">
+      		<div class="desc-stat">
+        		<div class="title-stat">
+          			<p>Statistics</p>
+          			<h5>Temperature</h5>
+        		</div>
+        		<select id="time" name="time" form="time">
+          			<option value="month">Month</option>
+          			<option value="week">Week</option>
+          			<option value="year">Year</option>
+          			<option value="day">Day</option>
+        		</select>
+        		<hr>
+      		</div>
+        	<canvas id="myLineChart1" width="700" height="480"></canvas>
+    	</div>
+    	<div class="small-stat">
+      		<div class="desc-stat">
+        		<div class="title-stat">
+          			<p>Statistics</p>
+          			<h5>Ignition</h5>
+        		</div>
+        		<select id="time" name="time" form="time">
+          			<option value="month">Month</option>
+          			<option value="week">Week</option>
+          			<option value="year">Year</option>
+          			<option value="day">Day</option>
+        		</select>
+        		<hr>
+      		</div>
+      		<canvas id="myLineChart2" width="700px" height="480px"></canvas>
+    	</div>
+    	<div class="long-stat">
+      		<div class="desc-stat-l">
+        		<div class="title-stat-l">
+          			<p>Statistics</p>
+          			<h5>Humidity (%)</h5>
+        		</div>
+        		<select id="time" name="time" form="time">
+          			<option value="month">Month</option>
+          			<option value="week">Week</option>
+          			<option value="year">Year</option>
+          			<option value="day">Day</option>
+        		</select>
+        		<hr>
+      		</div>
+      		<canvas id="myLineChart" width="1650" height="470"></canvas>
+    	</div>
+    	<div class="small-stat">
+      		<div class="desc-stat">
+        		<div class="title-stat">
+          			<p>Statistics</p>
+          			<h5>Atmospheric pressure (hPa)</h5>
+        		</div>
+        		<select id="time" name="time" form="time">
+          			<option value="month">Month</option>
+          			<option value="week">Week</option>
+          			<option value="year">Year</option>
+          			<option value="day">Day</option>
+        		</select>
+        		<hr>
+      		</div>
+      		<canvas id="myBarChart" width="700" height="480"></canvas>
+    	</div>
+    	<div class="small-stat">
+      		<div class="desc-stat">
+        		<div class="title-stat">
+          			<p>Statistics</p>
+          			<h5>Smell level</h5>
+        		</div>
+        		<select id="time" name="time" form="time">
+          			<option value="month">Month</option>
+          			<option value="week">Week</option>
+          			<option value="year">Year</option>
+          			<option value="day">Day</option>
+        		</select>
+        		<hr>
+      		</div>
+       		<canvas id="myBarChart1" width="700" height="480"></canvas>
+    	</div>
+    	<div class="long-stat">
+      		<div class="desc-stat-l">
+        		<div class="title-stat-l">
+          			<p>Statistics</p>
+          			<h5>Sun radiation</h5>
+        		</div>
+        		<select id="time" name="time" form="time">
+          			<option value="month">Month</option>
+          			<option value="week">Week</option>
+          			<option value="year">Year</option>
+          			<option value="day">Day</option>
+        		</select>
+        		<hr>
+      		</div>
+       		<canvas id="myLineChart3" width="1650" height="470"></canvas>
+    	</div>
+  	</div>
+  	<script>
+
 
     window.addEventListener('DOMContentLoaded', function() {
         var container = document.getElementById('main');
@@ -316,7 +318,7 @@
             },
             title: {
               display: true,
-              text: 'Дни',
+              text: 'Days',
             },
           },
           y: {
@@ -353,7 +355,7 @@
             },
             title: {
               display: true,
-              text: 'Май',
+              text: 'May',
             },
           },
           y: {
@@ -388,7 +390,7 @@
             },
             title: {
               display: true,
-              text: 'Дни',
+              text: 'Days',
             },
           },
           y: {
@@ -426,7 +428,7 @@
             },
             title: {
               display: true,
-              text: 'Дни',
+              text: 'Days',
             },
           },
           y: {
@@ -459,7 +461,7 @@
             display: true,
             title: {
               display: true,
-              text: 'Дни',
+              text: 'Days',
             },
           },
           y: {
@@ -488,7 +490,7 @@
             display: true,
             title: {
               display: true,
-              text: 'Дни',
+              text: 'Days',
             },
           },
           y: {

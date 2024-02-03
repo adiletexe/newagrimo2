@@ -2,69 +2,71 @@
 {% load static %}
 
 {% block style %}
-	<link rel="stylesheet" href="{% static 'css/job-d.css' %}">
-	<title>Специалисты</title>
+    <link rel="stylesheet" href="{% static 'css/job-d.css' %}">
+    <title>Specialists</title>
 {% endblock %}
+
 {% block content %}
-		<div class="filters">
-			<h1>Фильтры</h1>
-			<p><b>Опыт работы</b></p>
-			<form action="{% url 'specialists' %}" method="GET">
-			  <input type="checkbox" id="no" name="experience" value="no">
-			  <label for="no">Не имеет значения</label><br>
-			  <input type="checkbox" id="one" name="experience" value="1-3">
-			  <label for="one">от 1-3 лет</label><br>
-			  <input type="checkbox" id="three" name="experience" value="3-6">
-			  <label for="three">от 3-6 лет</label><br>
-			  <input type="checkbox" id="six" name="experience" value="6-9">
-			  <label for="six">от 6-9 лет</label><br>
-			  <input type="checkbox" id="ten" name="experience" value="10+">
-			  <label for="ten">от 10 лет</label><br>
+    <div class="filters">
+        <h1>Filters</h1>
+        <p><b>Work Experience</b></p>
+        <form action="{% url 'specialists' %}" method="GET">
+            <input type="checkbox" id="no" name="experience" value="no">
+            <label for="no">No preference</label><br>
+            <input type="checkbox" id="one" name="experience" value="1-3">
+            <label for="one">1-3 years</label><br>
+            <input type="checkbox" id="three" name="experience" value="3-6">
+            <label for="three">3-6 years</label><br>
+            <input type="checkbox" id="six" name="experience" value="6-9">
+            <label for="six">6-9 years</label><br>
+            <input type="checkbox" id="ten" name="experience" value="10+">
+            <label for="ten">10+ years</label><br>
 
-			  <p><b>Город</b></p>
-			  <input type="checkbox" id="all" name="city" value="all">
-			  <label for="all">Все</label><br>
-			  <input type="checkbox" id="ast" name="city" value="Астана">
-			  <label for="ast">Астана</label><br>
-			  <input type="checkbox" id="alm" name="city" value="Алматы">
-			  <label for="alm">Алматы</label><br>
-			  <input type="checkbox" id="act" name="city" value="Актобе">
-			  <label for="act">Актобе</label><br>
-			  <input type="checkbox" id="kar" name="city" value="Караганда">
-			  <label for="kar">Караганда</label><br>
+            <p><b>City</b></p>
+            <input type="checkbox" id="all" name="city" value="all">
+            <label for="all">All</label><br>
+            <input type="checkbox" id="ast" name="city" value="Astana">
+            <label for="ast">Astana</label><br>
+            <input type="checkbox" id="alm" name="city" value="Almaty">
+            <label for="alm">Almaty</label><br>
+            <input type="checkbox" id="act" name="city" value="Aktobe">
+            <label for="act">Aktobe</label><br>
+            <input type="checkbox" id="kar" name="city" value="Karaganda">
+            <label for="kar">Karaganda</label><br>
 
-			  <p><b>Специализация</b></p>
-			  <input type="checkbox" id="all" name="specialization" value="Овощевод">
-			  <label for="all">Овощевод</label><br>
-			  <input type="checkbox" id="ast" name="specialization" value="Семеновод">
-			  <label for="ast">Семеновод</label><br>
-			  <input type="checkbox" id="alm" name="specialization" value="Агрохимик">
-			  <label for="alm">Агрохимик</label><br>
-			  <input type="checkbox" id="act" name="specialization" value="Защита растений">
-			  <label for="act">Защита растений</label><br>
-			  <input type="checkbox" id="kar" name="specialization" value="Агроном-датчик">
-			  <label for="kar">Агроном-учетчик</label><br>
-				<input type="submit" value="Поиск">
-		</div>
-		<div class="lenta">
-			<h1>Список вакансий</h1>
+            <p><b>Specialization</b></p>
+            <input type="checkbox" id="all" name="specialization" value="Horticulturist">
+            <label for="all">Horticulturist</label><br>
+            <input type="checkbox" id="ast" name="specialization" value="Seed grower">
+            <label for="ast">Seed grower</label><br>
+            <input type="checkbox" id="alm" name="specialization" value="Agrochemist">
+            <label for="alm">Agrochemist</label><br>
+            <input type="checkbox" id="act" name="specialization" value="Plant protection">
+            <label for="act">Plant protection</label><br>
+            <input type="checkbox" id="kar" name="specialization" value="Agronomist-sensor">
+            <label for="kar">Agronomist-accountant</label><br>
+            <input type="submit" value="Search">
+        </form>
+    </div>
+    <div class="lenta">
+        <h1>Vacancy List</h1>
 
-			{% for s in specialists %}
-			<div class="job-lent">
-				<img src="{{ s.photo.url }}" height="150px" width="150px">
-				<ul class="stats">
-					<li>{{s.fullname}}</li>
-					<li>{{s.profession}}</li>
-					<li>Возраст: {{s.age}}</li>
-					<li>Стаж: {{s.experience}}</li>
-					<li>Город: {{s.city}}</li>
-				</ul>
-				<div class="rating">
-					{% for i in "xxxxx" %}
-						<i class="fa fa-star fa-2x" aria-hidden="true" {% if forloop.counter <= s.rating %}style="color: yellow;"{% endif %}></i>
-					{% endfor %}
-				</div>
-			</div>
-			{% endfor %}
-		</div>
+        {% for s in specialists %}
+        <div class="job-lent">
+            <img src="{{ s.photo.url }}" height="150px" width="150px">
+            <ul class="stats">
+                <li>{{s.fullname}}</li>
+                <li>{{s.profession}}</li>
+                <li>Age: {{s.age}}</li>
+                <li>Experience: {{s.experience}}</li>
+                <li>City: {{s.city}}</li>
+            </ul>
+            <div class="rating">
+                {% for i in "xxxxx" %}
+                    <i class="fa fa-star fa-2x" aria-hidden="true" {% if forloop.counter <= s.rating %}style="color: yellow;"{% endif %}></i>
+                {% endfor %}
+            </div>
+        </div>
+        {% endfor %}
+    </div>
 {% endblock %}

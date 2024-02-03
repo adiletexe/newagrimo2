@@ -15,31 +15,31 @@
     <p>{{userprofile.profession}}</p>
     <p>{{userprofile.telephone}}</p>
     <div id="edit">
-      <button style="margin-right: 15px;" id="ed" onclick="toggleReadonly()"><span id="iz">Изменить</span><i class="fa fa-pencil" aria-hidden="true"></i></button>
-      <button><span>Настройки</span><i class="fa fa-cog" aria-hidden="true"></i></button>
+      <button style="margin-right: 15px;" id="ed" onclick="toggleReadonly()"><span id="iz">Edit</span><i class="fa fa-pencil" aria-hidden="true"></i></button>
+      <button><span>Setting</span><i class="fa fa-cog" aria-hidden="true"></i></button>
     </div>
   </div>
   <div id="description">
     <div id="contdes">
-      <h1>Личные данные:</h1>
+      <h1>Personal information:</h1>
       <form id="data" action="{% url 'change' %}" method="POST">
         <div>
-          <p>Электронная почта</p>
+          <p>E-mail</p>
           <input id = "email" type="username" value="waw" readonly>
         </div>
         <div id="ci">
-          <p>Город</p>
+          <p>City</p>
           <input id = "city" type="city" value="waw" readonly>
         </div>
         <div id="re">
-          <p>Регион</p>
+          <p>Region</p>
           <input id = "reg" type="region" value="waw" readonly>
         </div>
         <div id="fer">
-          <p>Ферма</p>
+          <p>Farm</p>
           <input id = "farm" type="farm" value="waw" readonly>
         </div>
-        <button id="sub">Сохранить</button>
+        <button id="sub">Save</button>
       </form>
     </div>
   </div>
