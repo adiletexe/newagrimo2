@@ -14,6 +14,7 @@ urlpatterns = [
     path('startif', views.startif, name='startif'),
     path('endif', views.endif, name='endif'),
     path('logout', views.logoutsystem, name='logoutsystem'),
+    path('delete_all_users_data', views.delete_all_users_data, name='delete_all_users_data'),
     path('graphs/<str:param>/', views.graphs, name='graphs'),
     path('graphspredict/<str:param>/', views.graphspredict, name='graphspredict'),
     path('graphsai', views.graphsai, name='graphsai'),
