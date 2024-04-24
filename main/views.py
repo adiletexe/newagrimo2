@@ -20,7 +20,7 @@ import socket
 # import serial
 import time
 from random import randint
-
+import random
 from rest_framework.views import APIView
 from rest_framework.response import Response
 from rest_framework import status
