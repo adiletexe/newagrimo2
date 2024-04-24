@@ -30,7 +30,6 @@ import os
 from django.shortcuts import get_object_or_404
 from rest_framework.decorators import api_view
 from rest_framework.response import Response
-from myapp.models import Sunradiation, Humidity, Odor, Raindrop, Temperature, Light, Moisture, Pressure  # Adjust 'myapp' to your app's name
 import random
 import json
 
