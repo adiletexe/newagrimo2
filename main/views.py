@@ -60,7 +60,7 @@ def update_graphsmin(request):
                 }.get(sensor_type, (0, 100))  # Default range if sensor type not found
 
                 # Assign a random targetmin value from the determined range
-                targetmin = random.randint(*random_range)
+                targetminper = random.randint(*random_range)
 
                 # Fetch the matching model dynamically based on sensor_type
                 ModelClass = globals().get(sensor_type)  # Assuming each sensor has a corresponding model named exactly after the sensor
