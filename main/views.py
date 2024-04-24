@@ -41,20 +41,28 @@ def update_graphsmin(request):
                 user1 = User.objects.get(username=username)
                 print(item)
                 if sensor == "Sunradiation":
+                    targetmin = random.randint(250, 300)
                     matching_model = Sunradiation.objects.filter(user_id=user1.id, min=targetmin).first()
                 elif sensor == "Humidity":
+                    targetmin = random.randint(50, 60)
                     matching_model = Humidity.objects.filter(user_id=user1.id, min=targetmin).first()
                 elif sensor == "Odor":
+                    targetmin = random.randint(650, 700)
                     matching_model = Odor.objects.filter(user_id=user1.id, min=targetmin).first()
                 elif sensor == "Raindrop":
+                    targetmin = random.randint(5, 10)
                     matching_model = Raindrop.objects.filter(user_id=user1.id, min=targetmin).first()
                 elif sensor == "Temperature":
+                    targetmin = random.randint(50, 60)
                     matching_model = Temperature.objects.filter(user_id=user1.id, min=targetmin).first()
                 elif sensor == "Light":
+                    targetmin = random.randint(0, 0)
                     matching_model = Light.objects.filter(user_id=user1.id, min=targetmin).first()
                 elif sensor == "Moisture":
+                    targetmin = random.randint(0, 3)
                     matching_model = Moisture.objects.filter(user_id=user1.id, min=targetmin).first()
                 elif sensor == "Pressure":
+                    targetmin = random.randint(800, 850)
                     matching_model = Pressure.objects.filter(user_id=user1.id, min=targetmin).first()
 
                 if matching_model:
