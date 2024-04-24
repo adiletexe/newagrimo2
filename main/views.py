@@ -889,3 +889,20 @@ def logoutsystem(request):
     if request.method == "GET":
         logout(request)
         return redirect('loginsystem')
+
+def delete_all_users_data(request):
+    if request.method == "GET":
+        models = [Sunradiation, Humidity, Odor, Raindrop, Temperature, Light, Moisture, Pressure]
+        for model in models:
+            count = model.objects.all().count()
+            model.objects.all().delete()
+            messages.info(request, f'Deleted all data from {model.__name__} ({count} entries).')
+
+        return redirect('index')
+    else:
+        return HttpResponse('Method not allowed', status=405)
+
+def logoutsystem(request):
+    if request.method == "GET":
+        logout(request)
+        return redirect('loginsystem')
