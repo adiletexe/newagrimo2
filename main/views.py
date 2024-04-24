@@ -896,7 +896,6 @@ def delete_all_users_data(request):
         for model in models:
             count = model.objects.all().count()
             model.objects.all().delete()
-            messages.info(request, f'Deleted all data from {model.__name__} ({count} entries).')
 
         return redirect('index')
     else:
