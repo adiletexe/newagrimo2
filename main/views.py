@@ -27,48 +27,54 @@ from rest_framework import status
 from rest_framework.decorators import api_view
 import os
 
+from django.shortcuts import get_object_or_404
+from rest_framework.decorators import api_view
+from rest_framework.response import Response
+import random
+import json
+
 @api_view(['POST'])
 def update_graphsmin(request):
     if request.method == "POST":
         try:
             data = request.data
-
             for item in data:
                 username = item['username']
-                sensor = item['sensor']
+                sensor_type = item['sensor']  # Sensor type is still provided to fetch the right model
                 targetmin = item['targetmin']
                 targetminper = item['targetminper']
-                user1 = User.objects.get(username=username)
-                print(item)
-                if sensor == "Sunradiation":
-                    targetmin = random.randint(250, 300)
-                    matching_model = Sunradiation.objects.filter(user_id=user1.id, min=targetmin).first()
-                elif sensor == "Humidity":
-                    targetmin = random.randint(50, 60)
-                    matching_model = Humidity.objects.filter(user_id=user1.id, min=targetmin).first()
-                elif sensor == "Odor":
-                    targetmin = random.randint(650, 700)
-                    matching_model = Odor.objects.filter(user_id=user1.id, min=targetmin).first()
-                elif sensor == "Raindrop":
-                    targetmin = random.randint(5, 10)
-                    matching_model = Raindrop.objects.filter(user_id=user1.id, min=targetmin).first()
-                elif sensor == "Temperature":
-                    targetmin = random.randint(50, 60)
-                    matching_model = Temperature.objects.filter(user_id=user1.id, min=targetmin).first()
-                elif sensor == "Light":
-                    targetmin = random.randint(0, 0)
-                    matching_model = Light.objects.filter(user_id=user1.id, min=targetmin).first()
-                elif sensor == "Moisture":
-                    targetmin = random.randint(0, 3)
-                    matching_model = Moisture.objects.filter(user_id=user1.id, min=targetmin).first()
-                elif sensor == "Pressure":
-                    targetmin = random.randint(800, 850)
-                    matching_model = Pressure.objects.filter(user_id=user1.id, min=targetmin).first()
 
-                if matching_model:
-                    matching_model.minper = targetminper
-                    matching_model.save()
-                    print("Model is saved")
+                # Fetch the user
+                user1 = get_object_or_404(User, username=username)
+
+                # Determine the random range based on sensor type
+                random_range = {
+                    "Sunradiation": (250, 300),
+                    "Humidity": (50, 60),
+                    "Odor": (650, 700),
+                    "Raindrop": (5, 10),
+                    "Temperature": (50, 60),
+                    "Light": (0, 0),
+                    "Moisture": (0, 3),
+                    "Pressure": (800, 850)
+                }.get(sensor_type, (0, 100))  # Default range if sensor type not found
+
+                # Assign a random targetmin value from the determined range
+                targetmin = random.randint(*random_range)
+
+                # Fetch the matching model dynamically based on sensor_type
+                ModelClass = globals().get(sensor_type)  # Assuming each sensor has a corresponding model named exactly after the sensor
+                if ModelClass:
+                    matching_model = ModelClass.objects.filter(user_id=user1.id, min=targetmin).first()
+                    if matching_model:
+                        matching_model.minper = targetminper
+                        matching_model.save()
+                        print(f"Model for {sensor_type} updated.")
+                    else:
+                        print(f"No matching model found for {sensor_type}.")
+                else:
+                    print(f"No model class found for {sensor_type}.")
+
             return Response({'message': 'Data successfully processed'})
 
         except json.JSONDecodeError as e:
@@ -78,6 +84,7 @@ def update_graphsmin(request):
             return Response({'error': str(e)}, status=500)
 
     return Response({'error': 'Method not allowed'}, status=405)
+
 
 def get_coordinates(address):
     geolocator = Nominatim(user_agent="my_geocoder")
