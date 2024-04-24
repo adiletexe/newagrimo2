@@ -30,6 +30,7 @@ import os
 from django.shortcuts import get_object_or_404
 from rest_framework.decorators import api_view
 from rest_framework.response import Response
+from myapp.models import Sunradiation, Humidity, Odor, Raindrop, Temperature, Light, Moisture, Pressure  # Adjust 'myapp' to your app's name
 import random
 import json
 
@@ -38,42 +39,49 @@ def update_graphsmin(request):
     if request.method == "POST":
         try:
             data = request.data
+            # A dictionary of all sensor types and their corresponding Django models
+            sensor_models = {
+                "Sunradiation": Sunradiation,
+                "Humidity": Humidity,
+                "Odor": Odor,
+                "Raindrop": Raindrop,
+                "Temperature": Temperature,
+                "Light": Light,
+                "Moisture": Moisture,
+                "Pressure": Pressure,
+            }
+
             for item in data:
                 username = item['username']
-                sensor_type = item['sensor']  # Sensor type is still provided to fetch the right model
                 targetmin = item['targetmin']
-                targetminper = item['targetminper']
-
+                
                 # Fetch the user
                 user1 = get_object_or_404(User, username=username)
 
-                # Determine the random range based on sensor type
-                random_range = {
-                    "Sunradiation": (250, 300),
-                    "Humidity": (50, 60),
-                    "Odor": (650, 700),
-                    "Raindrop": (5, 10),
-                    "Temperature": (50, 60),
-                    "Light": (0, 0),
-                    "Moisture": (0, 3),
-                    "Pressure": (800, 850)
-                }.get(sensor_type, (0, 100))  # Default range if sensor type not found
+                # Iterate over all sensor types and update accordingly
+                for sensor_type, ModelClass in sensor_models.items():
+                    # Determine the random range based on sensor type
+                    random_range = {
+                        "Sunradiation": (250, 300),
+                        "Humidity": (50, 60),
+                        "Odor": (650, 700),
+                        "Raindrop": (5, 10),
+                        "Temperature": (50, 60),
+                        "Light": (0, 0),
+                        "Moisture": (0, 3),
+                        "Pressure": (800, 850)
+                    }.get(sensor_type, (0, 100)) 
 
-                # Assign a random targetmin value from the determined range
-                targetminper = random.randint(*random_range)
+                    targetminper = random.randint(*random_range)
 
-                # Fetch the matching model dynamically based on sensor_type
-                ModelClass = globals().get(sensor_type)  # Assuming each sensor has a corresponding model named exactly after the sensor
-                if ModelClass:
+                    # Fetch and update the matching model
                     matching_model = ModelClass.objects.filter(user_id=user1.id, min=targetmin).first()
                     if matching_model:
                         matching_model.minper = targetminper
                         matching_model.save()
-                        print(f"Model for {sensor_type} updated.")
+                        print(f"Updated {sensor_type} model for user {username}.")
                     else:
-                        print(f"No matching model found for {sensor_type}.")
-                else:
-                    print(f"No model class found for {sensor_type}.")
+                        print(f"No matching {sensor_type} model found for user {username}.")
 
             return Response({'message': 'Data successfully processed'})
 
